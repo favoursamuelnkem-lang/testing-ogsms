@@ -68,6 +68,28 @@ async function sendWelcomeEmail(user) {
   });
 }
 
+async function sendRegistrationWelcomeEmail(user) {
+  if (!user?.email) return false;
+
+  const name = user.fullName || "there";
+  return sendResendEmail({
+    to: user.email,
+    subject: "Welcome to OGSMS",
+    html: `
+      <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:24px;color:#17323a">
+        <div style="padding-bottom:18px;border-bottom:1px solid #e5e7eb">
+          <div style="font-size:24px;font-weight:800;color:#0B4F63">OGSMS</div>
+        </div>
+        <div style="padding:28px 4px">
+          <h1 style="margin:0 0 12px;font-size:26px;color:#0B4F63">Welcome to OGSMS, ${escapeHtml(name)}</h1>
+          <p style="font-size:15px;line-height:1.7;color:#52636B">Your account has been created successfully. You can now fund your wallet, purchase foreign numbers and manage incoming SMS from your OGSMS dashboard.</p>
+          <a href="${APP_BASE_URL}/dashboard.html" style="display:inline-block;background:#F97316;color:#fff;text-decoration:none;padding:12px 18px;border-radius:8px;font-weight:700;margin-top:10px">Open OGSMS</a>
+        </div>
+        <p style="font-size:12px;color:#8a969b">If you did not create this account, please contact OGSMS support.</p>
+      </div>`
+  });
+}
+
 function escapeHtml(value) {
   return String(value)
     .replace(/&/g, "&amp;")
@@ -154,6 +176,7 @@ const userSchema = new mongoose.Schema({
     email: String,
     password: String,
     balance: { type: Number, default: 0 },
+    phoneNumber: { type: String, default: "" },
     processedTxIds: { type: [String], default: [] },
     resetToken: { type: String, default: null },
     resetTokenExpires: { type: Date, default: null },
@@ -242,7 +265,8 @@ app.post(
       const {
         fullName,
         email,
-        password
+        password,
+        phoneNumber
       } = req.body;
 
       const existingUser =
@@ -267,14 +291,20 @@ app.post(
       new User({
 
         fullName,
-        email,
+        email: String(email || "").trim().toLowerCase(),
         password,
+        phoneNumber: String(phoneNumber || "").trim(),
 
         balance: 0
 
       });
 
       await newUser.save();
+
+      // Send the registration welcome email without blocking account creation.
+      sendRegistrationWelcomeEmail(newUser).catch(emailError => {
+        console.log("REGISTRATION WELCOME EMAIL ERROR:", emailError.response?.data || emailError.message);
+      });
 
       res.json({
 
@@ -440,6 +470,9 @@ app.post(
 
           email:
           user.email,
+
+          phoneNumber:
+          user.phoneNumber || "",
 
           balance:
           user.balance

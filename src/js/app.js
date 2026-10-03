@@ -84,6 +84,11 @@ if(registerForm){
         "email"
       ).value;
 
+      const phoneNumber =
+      document.getElementById(
+        "phoneNumber"
+      ).value.trim();
+
       const password =
       document.getElementById(
         "password"
@@ -125,6 +130,7 @@ if(registerForm){
 
               fullName,
               email,
+              phoneNumber,
               password
 
             })
