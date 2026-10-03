@@ -1,0 +1,353 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Purchase History - OGSMS</title><link rel="icon" href="image/favicon.jpeg"><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/ogsms-modern.css"></head><body class="bg-[#F7F9FB] text-gray-900"><div class="min-h-screen md:flex"><div id="overlay" class="hidden fixed inset-0 bg-black/30 z-40 md:hidden"></div><aside id="sidebar" class="fixed md:sticky top-0 left-0 z-50 -translate-x-full md:translate-x-0 transition-transform duration-300 w-[270px] h-screen ogsms-sidebar p-5 shrink-0 mobile-drawer"><div class="flex items-center justify-between mb-8"><a href="dashboard.html" class="flex items-center gap-3"><span class="auth-logo-mark !w-9 !h-9 !rounded-[11px] text-sm">OG</span><span class="text-[22px] font-extrabold tracking-tight text-[#0B4F63]">OGSMS</span></a><button id="closeMenu" class="md:hidden text-2xl text-gray-400">×</button></div><div class="ogsms-section-label">Overview</div><nav class="space-y-1"><a href="dashboard.html" class="ogsms-sidebar-link "><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Dashboard</span></a><a href="wallet.html" class="ogsms-sidebar-link "><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5H19a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5.5A2.5 2.5 0 0 1 3 16.5v-9Z"/><path d="M16 13h5"/><circle cx="16" cy="13" r=".8" fill="currentColor"/></svg><span>Wallet</span></a><a href="numbers.html" class="ogsms-sidebar-link "><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M7 3h10v18H7z"/><path d="M10 7h4M10 11h4M10 15h4"/></svg><span>Buy Numbers</span></a><a href="sms.html" class="ogsms-sidebar-link "><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H11l-5.5 4v-4h-1A2.5 2.5 0 0 1 2 13.5v-8A2.5 2.5 0 0 1 4 5.5Z"/></svg><span>SMS Inbox</span></a><a href="history.html" class="ogsms-sidebar-link active"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5M12 7v5l3 2"/></svg><span>Purchase History</span></a></nav><div class="ogsms-section-label">Account</div><nav class="space-y-1"><a href="account.html" class="ogsms-sidebar-link "><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2"/><path d="M5 20a7 7 0 0 1 14 0"/></svg><span>Profile & Settings</span></a><a href="notifications.html" class="ogsms-sidebar-link "><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><span>Notifications</span></a><a href="support.html" class="ogsms-sidebar-link "><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.2 9a3 3 0 0 1 5.6 1.5c0 2-2.8 2-2.8 4M12 17.5h.01"/></svg><span>Help & Support</span></a></nav><div class="mt-7 p-4 rounded-2xl bg-[#F4F8F9] border border-[#E5EDF0]"><p class="text-xs font-bold text-[#0B4F63]">Need help?</p><p class="text-[11px] text-gray-500 mt-1 leading-relaxed">Our support team is available to help with your wallet, numbers and SMS.</p><a href="support.html" class="text-xs font-bold text-orange-500 inline-block mt-3">Contact support →</a></div><div class="absolute bottom-5 left-5 right-5"><button id="logoutBtn" class="ogsms-sidebar-link w-full justify-center bg-gray-50 hover:bg-red-50 hover:text-red-500"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M10 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h5"/><path d="m14 8 4 4-4 4M8 12h10"/></svg><span>Logout</span></button></div></aside><main class="flex-1 min-w-0"><header class="ogsms-topbar sticky top-0 z-30 px-4 sm:px-6 lg:px-9 py-4 flex items-center justify-between"><div class="flex items-center gap-3"><button id="menuBtn" class="md:hidden w-10 h-10 rounded-xl bg-[#0B4F63] text-white">☰</button><div><p class="text-[11px] text-gray-400">OGSMS Account</p><h1 class="font-bold text-[#0B4F63] text-lg">Purchase History</h1></div></div><div class="flex items-center gap-3"><a href="notifications.html" class="hidden sm:flex w-10 h-10 rounded-xl border border-gray-200 bg-white items-center justify-center text-gray-500"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg></a><a href="wallet.html" class="ogsms-accent-btn px-4 py-2.5 text-sm">+ Fund wallet</a></div></header><div class="p-4 sm:p-6 lg:p-9"><section class="mb-6"><p class="text-sm text-gray-400">Orders</p><div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4"><div><h2 class="text-2xl sm:text-3xl font-extrabold text-[#12252D] mt-1">Purchase history</h2><p class="text-sm text-gray-500 mt-2">Track your numbers, SMS status and refunds.</p></div><a href="numbers.html" class="ogsms-accent-btn px-5 py-3 text-sm text-center">Buy another number</a></div></section><section class="ogsms-card p-4 sm:p-6"><div class="flex flex-col sm:flex-row gap-3 mb-5"><input id="historySearch" class="ogsms-input" placeholder="Search by number or service..."><select id="historyFilter" class="ogsms-input sm:max-w-[190px]"><option value="all">All statuses</option><option value="successful">Successful</option><option value="pending">Pending</option><option value="cancelled">Cancelled</option></select></div><div id="historyContainer" class="space-y-3">Loading purchases...</div></section></div></main></div><script>const menuBtn=document.getElementById('menuBtn'),closeMenu=document.getElementById('closeMenu'),sidebarEl=document.getElementById('sidebar'),overlay=document.getElementById('overlay');function openMenu(){sidebarEl.classList.remove('-translate-x-full');overlay.classList.remove('hidden')}function closeMenuFn(){sidebarEl.classList.add('-translate-x-full');overlay.classList.add('hidden')}menuBtn?.addEventListener('click',openMenu);closeMenu?.addEventListener('click',closeMenuFn);overlay?.addEventListener('click',closeMenuFn);document.getElementById('logoutBtn')?.addEventListener('click',()=>{localStorage.removeItem('currentUser');window.location.href='login.html'});if(!localStorage.getItem('currentUser')) window.location.href='login.html';</script><script src="js/app.js"></script><script>
+    let historyData = [];
+   
+    async function loadHistory(){
+
+      const currentUser =
+      JSON.parse(
+        localStorage.getItem(
+          "currentUser"
+        )
+      );
+
+      if(!currentUser){
+
+        window.location.href =
+        "login.html";
+
+        return;
+
+      }
+
+      try{
+
+        const response =
+       await fetch(
+  `${API_URL}/purchase-history`,
+          {
+
+            method: "POST",
+
+            headers: {
+
+              "Content-Type":
+              "application/json"
+
+            },
+
+            body: JSON.stringify({
+
+              email:
+              currentUser.email
+
+            })
+
+          }
+
+        );
+
+        const data =
+        await response.json();
+        historyData = data.purchases;
+
+        const container =
+        document.getElementById(
+          "historyContainer"
+        );
+
+        container.innerHTML = "";
+
+        if(data.purchases.length === 0){
+
+          container.innerHTML =
+
+          `
+
+          <p class="text-gray-500">
+
+            No purchases yet
+
+          </p>
+
+          `;
+
+          return;
+
+        }
+
+        data.purchases.forEach((item) => {
+
+        let cancelButton = "";
+
+if (item.status === "pending") {
+
+    const created = new Date(item.createdAt).getTime();
+
+    const elapsed = Math.floor((Date.now() - created) / 1000);
+
+    const remaining = 120 - elapsed;
+
+    if (remaining > 0) {
+
+        const minutes = Math.floor(remaining / 60);
+
+        const seconds = remaining % 60;
+
+        cancelButton = `
+            <div class="mt-3 bg-yellow-100 border border-yellow-300 rounded-xl p-3">
+
+                <p class="text-sm text-gray-700">
+                    Cancel available in
+                </p>
+
+                <p class="text-xl font-bold text-orange-500">
+                    ${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}
+                </p>
+
+            </div>
+        `;
+
+    } else {
+
+        cancelButton = `
+            <button
+                onclick="cancelNumber('${item.orderId}', ${item.price})"
+                class="mt-3 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl font-semibold"
+            >
+                Cancel Number
+            </button>
+        `;
+
+    }
+
+}
+        let statusHtml = "";
+
+if(item.status === "successful"){
+  statusHtml = `
+    <p class="text-green-600 font-bold">
+      ✅ Successful
+    </p>
+
+    ${
+      item.smsCode
+        ? `<p class="mt-2 text-lg font-bold text-[#0B4F63]">
+             SMS Code: ${item.smsCode}
+           </p>`
+        : ""
+    }
+  `;
+}
+
+else if(item.status === "cancelled"){
+  statusHtml = `
+    <p class="text-red-600 font-bold">
+      Cancelled
+    </p>
+  `;
+}
+
+else{
+  statusHtml = `
+    <p class="text-orange-500 font-bold">
+      Waiting for SMS...
+    </p>
+  `;
+}
+
+          container.innerHTML +=
+
+          `
+
+          <div
+            class="border rounded-2xl p-5"
+          >
+
+            <h2
+              class="text-xl font-bold"
+            >
+
+              ${item.number}
+
+            </h2>
+
+            <p
+              class="text-gray-500 mt-2"
+            >
+
+              Service:
+              ${item.service}
+
+            </p>
+
+            <p
+              class="text-gray-500"
+            >
+
+              Price:
+              ₦${item.price}
+
+            </p>
+
+            <p
+              class="text-gray-400 text-sm mt-2"
+            >
+
+              ${new Date(
+                item.createdAt
+              ).toLocaleString()}
+
+            </p>
+<div class="mt-3">
+  ${statusHtml}
+</div>
+
+<div
+    id="timer-${item.orderId}"
+    class="mt-2"
+></div>
+
+<div
+    id="sms-${item.orderId}"
+    class="mt-2"
+></div>
+
+${cancelButton}
+
+          </div>
+
+          `;
+
+         if(item.status === "pending"){
+    checkSMS(item.orderId);
+}
+
+});
+
+        
+
+      }
+
+      catch(error){
+
+        console.log(error);
+
+      }
+
+   }
+loadHistory();
+
+
+
+// Refresh every second so the countdown updates
+setInterval(() => {
+    loadHistory();
+}, 1000);
+
+async function checkSMS(orderId){
+
+    try{
+
+        const response = await fetch(`${API_URL}/get-sms`,{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({orderId})
+        });
+
+        const data = await response.json();
+
+        if(data.success){
+
+            // SMS has been saved in MongoDB.
+            // Reload history so it displays smsCode.
+            loadHistory();
+
+        }
+
+    }catch(error){
+
+        console.log(error);
+
+    }
+
+}
+
+
+
+async function cancelNumber(orderId, price){
+
+  const currentUser =
+  JSON.parse(
+    localStorage.getItem(
+      "currentUser"
+    )
+  );
+
+  try{
+
+    const response =
+    await fetch(
+  `${API_URL}/cancel-number`,
+      {
+
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+          "application/json"
+        },
+
+        body: JSON.stringify({
+
+          email:
+          currentUser.email,
+
+          orderId:
+          orderId,
+
+          price:
+          price
+
+        })
+
+      }
+
+    );
+
+    const data =
+    await response.json();
+
+   if(data.success){
+
+    showToast(
+        `✅ Number Cancelled • Refund ₦${price}`,
+        "success"
+    );
+
+    setTimeout(() => {
+        loadHistory();
+    }, 1800);
+
+}
+
+else{
+
+    showToast(data.message, "error");
+
+}
+
+  }
+
+ catch(error){
+
+    console.log(error);
+
+    showToast("Server Error", "error");
+
+}
+
+}
+
+  </script></body></html>

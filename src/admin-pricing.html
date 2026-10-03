@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pricing Manager</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:#f8fafc;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="p-6 lg:p-10">
+
+<!-- HEADER -->
+
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+
+<div>
+
+<a href="admin-dashboard.html">
+
+<div class="flex items-center pb-2">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0B4F63">
+<path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/>
+</svg>
+
+<p class="capitalize text-[#0B4F63] font-bold">
+
+Back
+
+</p>
+
+</div>
+
+</a>
+
+<h1 class="text-3xl font-bold text-[#0B4F63]">
+
+Pricing Manager
+
+</h1>
+
+<p class="text-gray-500 mt-2">
+
+Manage all countries, services and selling prices.
+
+</p>
+
+</div>
+
+</div>
+
+<!-- ADD PRICE -->
+
+<div class="bg-white rounded-2xl shadow mt-8 p-6">
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+
+<input
+id="country"
+type="text"
+placeholder="Country (usa)"
+class="border rounded-xl px-5 py-3 outline-none">
+
+<input
+id="service"
+type="text"
+placeholder="Service (facebook)"
+class="border rounded-xl px-5 py-3 outline-none">
+
+<input
+id="price"
+type="number"
+placeholder="Price"
+class="border rounded-xl px-5 py-3 outline-none">
+
+<button
+onclick="savePrice()"
+class="bg-orange-500 hover:bg-orange-600 text-white rounded-xl py-3">
+
+Save Price
+
+</button>
+
+</div>
+
+</div>
+
+<!-- DESKTOP -->
+
+<div class="bg-white rounded-2xl shadow mt-8 overflow-hidden">
+
+<div class="hidden lg:block overflow-x-auto">
+
+<table class="w-full">
+
+<thead class="bg-[#0B4F63] text-white">
+
+<tr>
+
+<th class="px-6 py-4 text-left">
+
+Country
+
+</th>
+
+<th class="px-6 py-4 text-left">
+
+Service
+
+</th>
+
+<th class="px-6 py-4 text-left">
+
+Price
+
+</th>
+
+<th class="px-6 py-4 text-left">
+
+Status
+
+</th>
+<td class="px-6 py-4">
+
+    <button
+        onclick="editPrice('${item._id}')"
+        class="bg-[#0B4F63] text-white px-4 py-2 rounded-lg">
+        Edit
+    </button>
+
+    <button
+        onclick="deletePrice('${item._id}')"
+        class="bg-red-500 text-white px-4 py-2 rounded-lg ml-2">
+        Delete
+    </button>
+
+</td>
+
+</tr>
+
+</thead>
+
+<tbody id="priceTable">
+
+<tr>
+
+<td colspan="5" class="text-center py-8">
+
+No Prices
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- MOBILE -->
+
+<div
+id="mobilePrices"
+class="lg:hidden p-4 space-y-4">
+
+<div class="border rounded-2xl p-5 shadow-sm">
+
+<div class="flex justify-between items-center">
+
+<h2 class="font-bold text-[#0B4F63]">
+
+No Prices
+
+</h2>
+
+<span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full">
+
+Empty
+
+</span>
+
+</div>
+
+<div class="mt-4 space-y-3 text-sm">
+
+<div class="flex justify-between">
+
+<span class="text-gray-500">
+
+Country
+
+</span>
+
+<span>
+
+-
+
+</span>
+
+</div>
+
+<div class="flex justify-between">
+
+<span class="text-gray-500">
+
+Service
+
+</span>
+
+<span>
+
+-
+
+</span>
+
+</div>
+
+<div class="flex justify-between">
+
+<span class="text-gray-500">
+
+Price
+
+</span>
+
+<span>
+
+₦0
+
+</span>
+
+</div>
+
+</div>
+
+<div class="grid grid-cols-2 gap-3 mt-5">
+
+<button class="bg-[#0B4F63] text-white py-3 rounded-xl">
+
+Edit
+
+</button>
+
+<button class="bg-orange-500 text-white py-3 rounded-xl">
+
+Save
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="admin-pricing.js"></script>
+
+</body>
+
+</html>

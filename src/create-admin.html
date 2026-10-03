@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<button onclick="createAdmin()">Create Admin</button>
+
+<script>
+
+async function createAdmin(){
+
+    const response = await fetch("/admin/create-admin",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+
+            username:"ognation",
+
+            password:"daysmith"
+
+        })
+
+    });
+
+    const data = await response.json();
+
+    alert(JSON.stringify(data));
+
+}
+
+</script>
+
+</body>
+</html>

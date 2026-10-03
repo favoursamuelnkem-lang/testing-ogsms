@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Manage Users</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+
+font-family:Poppins,sans-serif;
+
+}
+
+body{
+
+background:#f8fafc;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="p-6 lg:p-10">
+
+<!-- HEADER -->
+
+<div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+
+<div>
+   <a href="admin-dashboard.html">
+    <div class="flex items-center pb-2">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0B4F63"><path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/></svg>
+      <p class="capitalize text-[#0b4f63] font-bold ">back</p>
+    </div>
+   </a> 
+   
+
+<h1 class="text-3xl font-bold text-[#0B4F63]">
+
+Manage Users
+
+</h1>
+
+<p class="text-gray-500 mt-1">
+
+View and manage all registered users
+
+</p>
+
+</div>
+
+<input
+type="text"
+placeholder="Search users..."
+class="border rounded-xl px-5 py-3 outline-none w-full md:w-80">
+
+</div>
+
+<!-- TABLE -->
+
+<div class="bg-white rounded-2xl shadow mt-8 overflow-hidden">
+
+<div class="hidden lg:block overflow-x-auto">
+
+<table class="w-full">
+
+<thead class="bg-gray-100">
+
+<tr>
+
+<th class="text-left px-6 py-4">
+
+Name
+
+</th>
+
+<th class="text-left px-6 py-4">
+
+Email
+
+</th>
+
+<th class="text-left px-6 py-4">
+
+Wallet
+
+</th>
+
+<th class="text-left px-6 py-4">
+
+Status
+
+</th>
+
+<th class="text-left px-6 py-4">
+
+Action
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="usersTable">
+
+<tr class="border-t">
+
+<td class="px-6 py-5">
+
+No Users
+
+</td>
+
+<td class="px-6 py-5">
+
+-
+
+</td>
+
+<td class="px-6 py-5">
+
+₦0
+
+</td>
+
+<td class="px-6 py-5">
+
+<span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm">
+
+Empty
+
+</span>
+
+</td>
+
+<td class="px-6 py-5">
+
+<button class="bg-[#0B4F63] text-white px-4 py-2 rounded-lg">
+
+View
+
+</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- MOBILE -->
+
+<div id="mobileUsers" class="lg:hidden p-4 space-y-4">
+
+<div class="border rounded-2xl p-5">
+
+<h2 class="font-bold text-[#0B4F63]">
+
+No Users
+
+</h2>
+
+<p class="text-gray-500 mt-2">
+
+Email: -
+
+</p>
+
+<p class="mt-2">
+
+Wallet: ₦0
+
+</p>
+
+<div class="mt-4 flex gap-3">
+
+<button class="flex-1 bg-[#0B4F63] text-white py-3 rounded-xl">
+
+View
+
+</button>
+
+<button class="flex-1 bg-red-500 text-white py-3 rounded-xl">
+
+Delete
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="admin-user.js"></script>
+
+</body>
+
+</html>

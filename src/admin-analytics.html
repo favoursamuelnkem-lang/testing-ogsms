@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Analytics</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+
+font-family:Poppins,sans-serif;
+
+}
+
+body{
+
+background:#f8fafc;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="p-6 lg:p-10">
+
+<!-- HEADER -->
+
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+
+<div>
+
+<h1 class="text-3xl font-bold text-[#0B4F63]">
+
+Analytics
+
+</h1>
+
+<p class="text-gray-500 mt-2">
+
+Business reports and statistics
+
+</p>
+
+</div>
+
+<select class="border rounded-xl px-5 py-3 outline-none w-full sm:w-60">
+
+<option>This Month</option>
+
+<option>Last Month</option>
+
+<option>This Year</option>
+
+</select>
+
+</div>
+
+<!-- TOP CARDS -->
+
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mt-8">
+
+<div class="bg-white rounded-2xl shadow p-6">
+
+<p class="text-gray-500">
+
+Revenue
+
+</p>
+
+<h2 class="text-3xl font-bold text-[#0B4F63] mt-2">
+
+₦0
+
+</h2>
+
+</div>
+
+<div class="bg-white rounded-2xl shadow p-6">
+
+<p class="text-gray-500">
+
+Users
+
+</p>
+
+<h2 class="text-3xl font-bold text-orange-500 mt-2">
+
+0
+
+</h2>
+
+</div>
+
+<div class="bg-white rounded-2xl shadow p-6">
+
+<p class="text-gray-500">
+
+Orders
+
+</p>
+
+<h2 class="text-3xl font-bold text-green-600 mt-2">
+
+0
+
+</h2>
+
+</div>
+
+<div class="bg-white rounded-2xl shadow p-6">
+
+<p class="text-gray-500">
+
+Conversion
+
+</p>
+
+<h2 class="text-3xl font-bold text-red-500 mt-2">
+
+0%
+
+</h2>
+
+</div>
+
+</div>
+
+<!-- CHARTS -->
+
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-8">
+
+<div class="bg-white rounded-2xl shadow p-6">
+
+<h2 class="font-bold text-xl text-[#0B4F63] mb-6">
+
+Revenue Overview
+
+</h2>
+
+<canvas id="revenueChart"></canvas>
+
+</div>
+
+<div class="bg-white rounded-2xl shadow p-6">
+
+<h2 class="font-bold text-xl text-[#0B4F63] mb-6">
+
+Top Services
+
+</h2>
+
+<canvas id="serviceChart"></canvas>
+
+</div>
+
+</div>
+
+<!-- PERFORMANCE -->
+
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mt-8">
+
+<div class="bg-white rounded-2xl shadow p-6">
+
+<h3 class="text-gray-500">
+
+Most Purchased
+
+</h3>
+
+<p class="font-bold text-2xl mt-2">
+
+WhatsApp
+
+</p>
+
+</div>
+
+<div class="bg-white rounded-2xl shadow p-6">
+
+<h3 class="text-gray-500">
+
+Top Country
+
+</h3>
+
+<p class="font-bold text-2xl mt-2">
+
+USA
+
+</p>
+
+</div>
+
+<div class="bg-white rounded-2xl shadow p-6">
+
+<h3 class="text-gray-500">
+
+Average Order
+
+</h3>
+
+<p class="font-bold text-2xl mt-2">
+
+₦0
+
+</p>
+
+</div>
+
+<div class="bg-white rounded-2xl shadow p-6">
+
+<h3 class="text-gray-500">
+
+Growth
+
+</h3>
+
+<p class="font-bold text-2xl text-green-600 mt-2">
+
++0%
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+new Chart(document.getElementById("revenueChart"),{
+
+type:"line",
+
+data:{
+
+labels:["Jan","Feb","Mar","Apr","May","Jun"],
+
+datasets:[{
+
+label:"Revenue",
+
+data:[0,0,0,0,0,0],
+
+borderColor:"#0B4F63",
+
+backgroundColor:"rgba(11,79,99,.1)",
+
+fill:true,
+
+tension:.4
+
+}]
+
+}
+
+});
+
+new Chart(document.getElementById("serviceChart"),{
+
+type:"doughnut",
+
+data:{
+
+labels:["WhatsApp","Telegram","Facebook","Instagram"],
+
+datasets:[{
+
+data:[40,20,15,25],
+
+backgroundColor:[
+
+"#0B4F63",
+
+"#F97316",
+
+"#22C55E",
+
+"#EF4444"
+
+]
+
+}]
+
+}
+
+});
+
+</script>
+
+</body>
+
+</html>

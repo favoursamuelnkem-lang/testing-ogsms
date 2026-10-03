@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OGSMS Admin Dashboard</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:#f8fafc;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="flex min-h-screen">
+
+<!-- SIDEBAR -->
+
+<aside id="sidebar"
+class="fixed lg:relative z-50 w-72 h-screen bg-[#0B4F63] text-white -translate-x-full lg:translate-x-0 transition duration-300">
+
+<div class="p-8 border-b border-white/10">
+
+<h1 class="text-3xl font-bold">
+OGSMS
+</h1>
+
+<p class="text-sm text-gray-300 mt-2">
+Admin Dashboard
+</p>
+
+</div>
+
+<nav class="mt-8 px-5 space-y-2">
+
+<a href="admin-dashboard.html"
+class="flex items-center gap-4 bg-orange-500 rounded-xl px-5 py-4 font-semibold">
+
+Dashboard
+
+</a>
+
+<a href="admin-users.html"
+class="flex items-center gap-4 hover:bg-white/10 rounded-xl px-5 py-4 transition">
+
+Users
+
+</a>
+
+<a href="admin-purchase.html"
+class="flex items-center gap-4 hover:bg-white/10 rounded-xl px-5 py-4 transition">
+
+Purchased Numbers
+
+</a>
+
+<a href="admin-wallet.html"
+class="flex items-center gap-4 hover:bg-white/10 rounded-xl px-5 py-4 transition">
+
+Wallet
+
+</a>
+
+<a href="admin-payment.html"
+class="flex items-center gap-4 hover:bg-white/10 rounded-xl px-5 py-4 transition">
+
+Payments
+
+</a>
+
+
+<a href="admin-pricing.html"
+class="flex items-center gap-4 hover:bg-white/10 rounded-xl px-5 py-4 transition">
+
+Pricing
+
+</a>
+
+<a href="#"
+class="flex items-center gap-4 hover:bg-white/10 rounded-xl px-5 py-4 transition">
+
+Analytic
+
+</a>
+
+<a href="#"
+class="flex items-center gap-4 hover:bg-white/10 rounded-xl px-5 py-4 transition">
+
+Settings
+
+</a>
+
+</nav>
+
+<div class="absolute bottom-8 w-full px-5">
+
+<button
+class="bg-orange-500 hover:bg-orange-600 w-full py-4 rounded-xl font-semibold transition">
+
+Logout
+
+</button>
+
+</div>
+
+</aside>
+
+<!-- MAIN -->
+
+<div class="flex-1">
+
+<!-- TOP NAV -->
+
+<header
+class="bg-white shadow-sm flex items-center justify-between px-6 lg:px-10 py-6">
+
+<div class="flex items-center gap-4">
+
+<button
+id="menuBtn"
+class="lg:hidden bg-[#0B4F63] text-white p-3 rounded-lg">
+
+☰
+
+</button>
+
+<div>
+
+<h2 class="text-3xl font-bold text-[#0B4F63]">
+
+Dashboard
+
+</h2>
+
+<p class="text-gray-500">
+
+Welcome back Administrator
+
+</p>
+
+<button
+onclick="adminLogout()"
+class="bg-red-500 hover:bg-red-600 text-white px-5 py-3 rounded-xl">
+
+Logout
+
+</button>
+
+</div>
+
+</div>
+
+<div class="flex items-center gap-6">
+
+<input
+type="text"
+placeholder="Search..."
+class="hidden md:block border rounded-xl px-5 py-3 outline-none w-80">
+
+<button
+class="text-xl">
+
+🔔
+
+</button>
+
+<div
+class="flex items-center gap-3">
+
+<div
+class="w-12 h-12 rounded-full bg-[#0B4F63] flex items-center justify-center text-white font-bold">
+
+A
+
+</div>
+
+<div class="hidden md:block">
+
+<h3 class="font-semibold">
+
+Administrator
+
+</h3>
+
+<p class="text-sm text-gray-500">
+
+Super Admin
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+<!-- CONTENT -->
+
+<div class="p-6 lg:p-10">
+
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+
+<!-- CARD -->
+
+<div class="bg-white rounded-2xl shadow p-6">
+
+<p class="text-gray-500">
+
+Total Users
+
+</p>
+
+<h2
+id="totalUsers"
+class="text-4xl font-bold mt-3">
+
+0
+
+</h2>
+
+</div>
+
+<div class="bg-white rounded-2xl shadow p-6">
+
+<p class="text-gray-500">
+
+Numbers Sold
+
+</p>
+
+<h2
+id="numbersSold"
+class="text-4xl font-bold mt-3">
+
+0
+
+</h2>
+
+</div>
+
+<div class="bg-white rounded-2xl shadow p-6">
+
+<p class="text-gray-500">
+
+Revenue
+
+</p>
+
+<h2
+id="totalRevenue"
+class="text-4xl font-bold mt-3 text-orange-500">
+
+₦0
+
+</h2>
+
+</div>
+
+<div class="bg-white rounded-2xl shadow p-6">
+
+<p class="text-gray-500">
+
+Wallet Balance
+
+</p>
+
+<h2
+id="walletBalance"
+class="text-4xl font-bold mt-3 text-[#0B4F63]">
+
+₦0
+
+</h2>
+
+</div>
+
+<div class="bg-white rounded-2xl shadow p-6">
+
+<p class="text-gray-500">
+
+Pending Orders
+
+</p>
+
+<h2
+id="pendingOrders"
+class="text-4xl font-bold mt-3">
+
+0
+
+</h2>
+
+</div>
+
+<div class="bg-white rounded-2xl shadow p-6">
+
+<p class="text-gray-500">
+
+Cancelled Orders
+
+</p>
+
+<h2
+id="cancelledOrders"
+class="text-4xl font-bold mt-3 text-red-500">
+
+0
+
+</h2>
+
+</div>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- RECENT PURCHASES -->
+<!-- ========================= -->
+
+<div class="bg-white rounded-2xl shadow mt-10 overflow-hidden">
+
+    <!-- Header -->
+
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-6 border-b">
+
+        <h2 class="text-xl font-bold text-[#0B4F63]">
+
+            Recent Purchases
+
+        </h2>
+
+        <button class="text-orange-500 font-semibold hover:text-orange-600">
+
+            View All
+
+        </button>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- Desktop Table -->
+    <!-- ========================= -->
+
+    <div class="hidden lg:block overflow-x-auto">
+
+        <table class="w-full">
+
+            <thead class="bg-gray-50">
+
+                <tr>
+
+                    <th class="text-left px-6 py-4 font-semibold">
+                        User
+                    </th>
+
+                    <th class="text-left px-6 py-4 font-semibold">
+                        Number
+                    </th>
+
+                    <th class="text-left px-6 py-4 font-semibold">
+                        Service
+                    </th>
+
+                    <th class="text-left px-6 py-4 font-semibold">
+                        Price
+                    </th>
+
+                    <th class="text-left px-6 py-4 font-semibold">
+                        Status
+                    </th>
+
+                    <th class="text-left px-6 py-4 font-semibold">
+                        Date
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="purchaseTable">
+
+                <tr class="border-t">
+
+                    <td class="px-6 py-5">
+                        No Purchases
+                    </td>
+
+                    <td class="px-6 py-5">
+                        -
+                    </td>
+
+                    <td class="px-6 py-5">
+                        -
+                    </td>
+
+                    <td class="px-6 py-5">
+                        ₦0
+                    </td>
+
+                    <td class="px-6 py-5">
+
+                        <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm">
+
+                            Empty
+
+                        </span>
+
+                    </td>
+
+                    <td class="px-6 py-5">
+                        -
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- Mobile Cards -->
+    <!-- ========================= -->
+
+    <div id="purchaseCards" class="lg:hidden p-4 space-y-4">
+
+        <div class="border rounded-2xl p-5 shadow-sm">
+
+            <div class="flex justify-between items-center">
+
+                <h3 class="font-bold text-[#0B4F63]">
+
+                    No Purchases
+
+                </h3>
+
+                <span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full">
+
+                    Empty
+
+                </span>
+
+            </div>
+
+            <div class="mt-4 space-y-2 text-sm">
+
+                <div class="flex justify-between">
+
+                    <span class="text-gray-500">
+
+                        Number
+
+                    </span>
+
+                    <span>
+
+                        -
+
+                    </span>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span class="text-gray-500">
+
+                        Service
+
+                    </span>
+
+                    <span>
+
+                        -
+
+                    </span>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span class="text-gray-500">
+
+                        Price
+
+                    </span>
+
+                    <span>
+
+                        ₦0
+
+                    </span>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span class="text-gray-500">
+
+                        Date
+
+                    </span>
+
+                    <span>
+
+                        -
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- RECENT USERS -->
+<!-- ========================= -->
+
+<div class="bg-white rounded-2xl shadow mt-10 overflow-hidden">
+
+    <!-- Header -->
+
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-6 border-b">
+
+        <h2 class="text-xl font-bold text-[#0B4F63]">
+
+            Recent Users
+
+        </h2>
+
+        <button class="text-orange-500 font-semibold hover:text-orange-600">
+
+            View All
+
+        </button>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- Desktop Table -->
+    <!-- ========================= -->
+
+    <div class="hidden lg:block overflow-x-auto">
+
+        <table class="w-full">
+
+            <thead class="bg-gray-50">
+
+                <tr>
+
+                    <th class="text-left px-6 py-4 font-semibold">
+                        Name
+                    </th>
+
+                    <th class="text-left px-6 py-4 font-semibold">
+                        Email
+                    </th>
+
+                    <th class="text-left px-6 py-4 font-semibold">
+                        Wallet
+                    </th>
+
+                    <th class="text-left px-6 py-4 font-semibold">
+                        Joined
+                    </th>
+
+                    <th class="text-left px-6 py-4 font-semibold">
+                        Status
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="recentUsersTable">
+
+                <tr class="border-t">
+
+                    <td class="px-6 py-5">
+                        No Users
+                    </td>
+
+                    <td class="px-6 py-5">
+                        -
+                    </td>
+
+                    <td class="px-6 py-5">
+                        ₦0
+                    </td>
+
+                    <td class="px-6 py-5">
+                        -
+                    </td>
+
+                    <td class="px-6 py-5">
+
+                        <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm">
+
+                            Empty
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- Mobile Cards -->
+    <!-- ========================= -->
+
+    <div id="userCards" class="lg:hidden p-4 space-y-4">
+
+        <div class="border rounded-2xl p-5 shadow-sm">
+
+            <div class="flex justify-between items-center">
+
+                <h3 class="font-bold text-[#0B4F63]">
+
+                    No Users
+
+                </h3>
+
+                <span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full">
+
+                    Empty
+
+                </span>
+
+            </div>
+
+            <div class="mt-4 space-y-3 text-sm">
+
+                <div class="flex justify-between">
+
+                    <span class="text-gray-500">
+
+                        Email
+
+                    </span>
+
+                    <span>
+
+                        -
+
+                    </span>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span class="text-gray-500">
+
+                        Wallet
+
+                    </span>
+
+                    <span>
+
+                        ₦0
+
+                    </span>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span class="text-gray-500">
+
+                        Joined
+
+                    </span>
+
+                    <span>
+
+                        -
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- RECENT PAYMENTS -->
+<!-- ========================= -->
+
+<div class="bg-white rounded-2xl shadow mt-10 overflow-hidden">
+
+    <!-- Header -->
+
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-6 border-b">
+
+        <h2 class="text-xl font-bold text-[#0B4F63]">
+
+            Recent Payments
+
+        </h2>
+
+        <button class="text-orange-500 font-semibold hover:text-orange-600">
+
+            View All
+
+        </button>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- Desktop Table -->
+    <!-- ========================= -->
+
+    <div class="hidden lg:block overflow-x-auto">
+
+        <table class="w-full">
+
+            <thead class="bg-gray-50">
+
+                <tr>
+
+                    <th class="text-left px-6 py-4 font-semibold">
+                        Customer
+                    </th>
+
+                    <th class="text-left px-6 py-4 font-semibold">
+                        Amount
+                    </th>
+
+                    <th class="text-left px-6 py-4 font-semibold">
+                        Method
+                    </th>
+
+                    <th class="text-left px-6 py-4 font-semibold">
+                        Transaction ID
+                    </th>
+
+                    <th class="text-left px-6 py-4 font-semibold">
+                        Status
+                    </th>
+
+                    <th class="text-left px-6 py-4 font-semibold">
+                        Date
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="paymentTable">
+
+                <tr class="border-t">
+
+                    <td class="px-6 py-5">
+
+                        No Payments
+
+                    </td>
+
+                    <td class="px-6 py-5">
+
+                        ₦0
+
+                    </td>
+
+                    <td class="px-6 py-5">
+
+                        -
+
+                    </td>
+
+                    <td class="px-6 py-5">
+
+                        -
+
+                    </td>
+
+                    <td class="px-6 py-5">
+
+                        <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm">
+
+                            Empty
+
+                        </span>
+
+                    </td>
+
+                    <td class="px-6 py-5">
+
+                        -
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- Mobile Cards -->
+    <!-- ========================= -->
+
+    <div id="paymentCards" class="lg:hidden p-4 space-y-4">
+
+        <div class="border rounded-2xl p-5 shadow-sm">
+
+            <div class="flex justify-between items-center">
+
+                <h3 class="font-bold text-[#0B4F63]">
+
+                    No Payments
+
+                </h3>
+
+                <span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full">
+
+                    Empty
+
+                </span>
+
+            </div>
+
+            <div class="mt-4 space-y-3 text-sm">
+
+                <div class="flex justify-between">
+
+                    <span class="text-gray-500">
+
+                        Amount
+
+                    </span>
+
+                    <span>
+
+                        ₦0
+
+                    </span>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span class="text-gray-500">
+
+                        Method
+
+                    </span>
+
+                    <span>
+
+                        -
+
+                    </span>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span class="text-gray-500">
+
+                        Transaction ID
+
+                    </span>
+
+                    <span>
+
+                        -
+
+                    </span>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span class="text-gray-500">
+
+                        Date
+
+                    </span>
+
+                    <span>
+
+                        -
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================= -->
+<!-- QUICK ACTIONS -->
+<!-- ========================= -->
+
+<div class="mt-10">
+
+    <div class="flex items-center justify-between mb-6">
+
+        <h2 class="text-xl font-bold text-[#0B4F63]">
+
+            Quick Actions
+
+        </h2>
+
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+
+        <!-- USERS -->
+
+        <div class="bg-white rounded-2xl shadow hover:shadow-xl hover:-translate-y-1 duration-300 cursor-pointer p-6">
+
+            <div class="w-14 h-14 rounded-xl bg-[#0B4F63]/10 flex items-center justify-center">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-[#0B4F63]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 20h5V4H2v16h5m10 0v-2a4 4 0 00-8 0v2m8 0H9m4-10a3 3 0 100-6 3 3 0 000 6z"/>
+
+                </svg>
+
+            </div>
+
+            <h3 class="font-bold text-lg mt-5">
+
+                Manage Users
+
+            </h3>
+
+            <p class="text-gray-500 text-sm mt-2">
+
+                View, edit and manage all registered users.
+
+            </p>
+
+        </div>
+
+        <!-- PURCHASES -->
+
+        <div class="bg-white rounded-2xl shadow hover:shadow-xl hover:-translate-y-1 duration-300 cursor-pointer p-6">
+
+            <div class="w-14 h-14 rounded-xl bg-orange-100 flex items-center justify-center">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 3h18v18H3V3zm4 4h10v2H7zm0 4h10v2H7zm0 4h6v2H7z"/>
+
+                </svg>
+
+            </div>
+
+            <h3 class="font-bold text-lg mt-5">
+
+                Purchases
+
+            </h3>
+
+            <p class="text-gray-500 text-sm mt-2">
+
+                Manage all purchased numbers and orders.
+
+            </p>
+
+        </div>
+
+        <!-- PAYMENTS -->
+
+        <div class="bg-white rounded-2xl shadow hover:shadow-xl hover:-translate-y-1 duration-300 cursor-pointer p-6">
+
+            <div class="w-14 h-14 rounded-xl bg-green-100 flex items-center justify-center">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 9V7a5 5 0 00-10 0v2M5 9h14l-1 10H6L5 9z"/>
+
+                </svg>
+
+            </div>
+
+            <h3 class="font-bold text-lg mt-5">
+
+                Payments
+
+            </h3>
+
+            <p class="text-gray-500 text-sm mt-2">
+
+                Monitor wallet funding and transactions.
+
+            </p>
+
+        </div>
+
+        <!-- SETTINGS -->
+
+        <div class="bg-white rounded-2xl shadow hover:shadow-xl hover:-translate-y-1 duration-300 cursor-pointer p-6">
+
+            <div class="w-14 h-14 rounded-xl bg-red-100 flex items-center justify-center">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8a4 4 0 100 8 4 4 0 000-8zm8.94 4a7.97 7.97 0 00-.34-2l2.12-1.65-2-3.46-2.53 1a8.06 8.06 0 00-3.46-2l-.38-2.65H9.65l-.38 2.65a8.06 8.06 0 00-3.46 2l-2.53-1-2 3.46L3.4 10a8.2 8.2 0 000 4l-2.12 1.65 2 3.46 2.53-1a8.06 8.06 0 003.46 2l.38 2.65h4.7l.38-2.65a8.06 8.06 0 003.46-2l2.53 1 2-3.46L20.6 14c.23-.64.34-1.31.34-2z"/>
+
+                </svg>
+
+            </div>
+
+            <h3 class="font-bold text-lg mt-5">
+
+                Settings
+
+            </h3>
+
+            <p class="text-gray-500 text-sm mt-2">
+
+                Configure your OGSMS admin system.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================= -->
+<!-- ANALYTICS & ACTIVITY -->
+<!-- ========================= -->
+
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mt-10">
+
+    <!-- SALES OVERVIEW -->
+
+    <div class="xl:col-span-2 bg-white rounded-2xl shadow p-6">
+
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+
+            <div>
+
+                <h2 class="text-xl font-bold text-[#0B4F63]">
+
+                    Sales Overview
+
+                </h2>
+
+                <p class="text-gray-500 text-sm mt-1">
+
+                    Wallet funding & number sales
+
+                </p>
+
+            </div>
+
+            <select class="border rounded-xl px-4 py-2 outline-none">
+
+                <option>This Month</option>
+
+                <option>Last Month</option>
+
+                <option>This Year</option>
+
+            </select>
+
+        </div>
+
+        <div class="mt-8 h-72 rounded-2xl border-2 border-dashed border-gray-300 flex items-center justify-center">
+
+            <div class="text-center">
+
+                <h3 class="text-xl font-semibold text-[#0B4F63]">
+
+                    Revenue Chart
+
+                </h3>
+
+                <p class="text-gray-500 mt-2">
+
+                    Chart.js will display here
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- RECENT ACTIVITY -->
+
+    <div class="bg-white rounded-2xl shadow p-6">
+
+        <h2 class="text-xl font-bold text-[#0B4F63]">
+
+            Recent Activity
+
+        </h2>
+
+        <div class="space-y-6 mt-8">
+
+            <div class="flex gap-4">
+
+                <div class="w-3 h-3 rounded-full bg-green-500 mt-2"></div>
+
+                <div>
+
+                    <h3 class="font-semibold">
+
+                        Wallet Funded
+
+                    </h3>
+
+                    <p class="text-gray-500 text-sm">
+
+                        Customer funded wallet successfully.
+
+                    </p>
+
+                    <span class="text-xs text-gray-400">
+
+                        2 minutes ago
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="flex gap-4">
+
+                <div class="w-3 h-3 rounded-full bg-orange-500 mt-2"></div>
+
+                <div>
+
+                    <h3 class="font-semibold">
+
+                        New Number Purchased
+
+                    </h3>
+
+                    <p class="text-gray-500 text-sm">
+
+                        WhatsApp activation purchased.
+
+                    </p>
+
+                    <span class="text-xs text-gray-400">
+
+                        8 minutes ago
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="flex gap-4">
+
+                <div class="w-3 h-3 rounded-full bg-red-500 mt-2"></div>
+
+                <div>
+
+                    <h3 class="font-semibold">
+
+                        Refund Processed
+
+                    </h3>
+
+                    <p class="text-gray-500 text-sm">
+
+                        Automatic refund completed.
+
+                    </p>
+
+                    <span class="text-xs text-gray-400">
+
+                        30 minutes ago
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="flex gap-4">
+
+                <div class="w-3 h-3 rounded-full bg-[#0B4F63] mt-2"></div>
+
+                <div>
+
+                    <h3 class="font-semibold">
+
+                        New User Registered
+
+                    </h3>
+
+                    <p class="text-gray-500 text-sm">
+
+                        A new customer joined OGSMS.
+
+                    </p>
+
+                    <span class="text-xs text-gray-400">
+
+                        1 hour ago
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ========================= -->
+<!-- SYSTEM STATUS -->
+<!-- ========================= -->
+
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mt-10">
+
+<div class="bg-white rounded-2xl shadow p-6">
+
+<h3 class="text-gray-500">
+
+Server Status
+
+</h3>
+
+<div class="flex items-center gap-3 mt-5">
+
+<div class="w-3 h-3 rounded-full bg-green-500"></div>
+
+<p class="font-semibold">
+
+Online
+
+</p>
+
+</div>
+
+</div>
+
+<div class="bg-white rounded-2xl shadow p-6">
+
+<h3 class="text-gray-500">
+
+Database
+
+</h3>
+
+<div class="flex items-center gap-3 mt-5">
+
+<div class="w-3 h-3 rounded-full bg-green-500"></div>
+
+<p class="font-semibold">
+
+Connected
+
+</p>
+
+</div>
+
+</div>
+
+<div class="bg-white rounded-2xl shadow p-6">
+
+<h3 class="text-gray-500">
+
+Flutterwave
+
+</h3>
+
+<div class="flex items-center gap-3 mt-5">
+
+<div class="w-3 h-3 rounded-full bg-green-500"></div>
+
+<p class="font-semibold">
+
+Running
+
+</p>
+
+</div>
+
+</div>
+
+<div class="bg-white rounded-2xl shadow p-6">
+
+<h3 class="text-gray-500">
+
+5SIM API
+
+</h3>
+
+<div class="flex items-center gap-3 mt-5">
+
+<div class="w-3 h-3 rounded-full bg-green-500"></div>
+
+<p class="font-semibold">
+
+Active
+
+</p>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer class="mt-12 border-t pt-6 text-center text-gray-500">
+
+© 2026 OGSMS Admin Dashboard. All Rights Reserved.
+
+</footer>
+
+
+
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const sidebar = document.getElementById("sidebar");
+
+menuBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("-translate-x-full");
+});
+</script>
+
+<script src="admin.js"></script>
+
+
+<script src="admin.js"></script>
+
+</body>
+</html>

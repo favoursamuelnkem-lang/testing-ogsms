@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Wallet Funding</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+
+font-family:Poppins,sans-serif;
+
+}
+
+body{
+
+background:#f8fafc;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="p-6 lg:p-10">
+
+<!-- HEADER -->
+
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+
+<div>
+     <a href="admin-dashboard.html">
+    <div class="flex items-center pb-2">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0B4F63"><path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/></svg>
+      <p class="capitalize text-[#0b4f63] font-bold ">back</p>
+    </div>
+   </a> 
+
+<h1 class="text-3xl font-bold text-[#0B4F63]">
+
+Wallet Funding
+
+</h1>
+
+<p class="text-gray-500 mt-2">
+
+Monitor all wallet funding transactions
+
+</p>
+
+</div>
+
+<div class="flex flex-col sm:flex-row gap-3">
+
+<input
+
+type="text"
+
+placeholder="Search customer..."
+
+class="border rounded-xl px-5 py-3 outline-none w-full sm:w-72">
+
+<select
+
+class="border rounded-xl px-5 py-3 outline-none">
+
+<option>All Status</option>
+
+<option>Successful</option>
+
+<option>Pending</option>
+
+<option>Failed</option>
+
+</select>
+
+</div>
+
+</div>
+
+<!-- SUMMARY -->
+
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mt-8">
+
+<div class="bg-white rounded-2xl shadow p-6">
+
+<p class="text-gray-500">
+
+Today's Funding
+
+</p>
+
+<h2 class="text-3xl font-bold text-[#0B4F63] mt-2">
+
+₦0
+
+</h2>
+
+</div>
+
+<div class="bg-white rounded-2xl shadow p-6">
+
+<p class="text-gray-500">
+
+This Month
+
+</p>
+
+<h2 class="text-3xl font-bold text-orange-500 mt-2">
+
+₦0
+
+</h2>
+
+</div>
+
+<div class="bg-white rounded-2xl shadow p-6">
+
+<p class="text-gray-500">
+
+Successful
+
+</p>
+
+<h2 class="text-3xl font-bold text-green-600 mt-2">
+
+0
+
+</h2>
+
+</div>
+
+<div class="bg-white rounded-2xl shadow p-6">
+
+<p class="text-gray-500">
+
+Failed
+
+</p>
+
+<h2 class="text-3xl font-bold text-red-500 mt-2">
+
+0
+
+</h2>
+
+</div>
+
+</div>
+
+<!-- TABLE -->
+
+<div class="bg-white rounded-2xl shadow mt-8 overflow-hidden">
+
+<div class="hidden lg:block overflow-x-auto">
+
+<table class="w-full">
+
+<thead class="bg-gray-100">
+
+<tr>
+
+<th class="px-6 py-4 text-left">
+
+Customer
+
+</th>
+
+<th class="px-6 py-4 text-left">
+
+Amount
+
+</th>
+
+<th class="px-6 py-4 text-left">
+
+Reference
+
+</th>
+
+<th class="px-6 py-4 text-left">
+
+Method
+
+</th>
+
+<th class="px-6 py-4 text-left">
+
+Status
+
+</th>
+
+<th class="px-6 py-4 text-left">
+
+Date
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="walletTable">
+
+<tr class="border-t">
+
+<td class="px-6 py-5">
+
+No Transactions
+
+</td>
+
+<td class="px-6 py-5">
+
+₦0
+
+</td>
+
+<td class="px-6 py-5">
+
+-
+
+</td>
+
+<td class="px-6 py-5">
+
+-
+
+</td>
+
+<td class="px-6 py-5">
+
+<span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm">
+
+Empty
+
+</span>
+
+</td>
+
+<td class="px-6 py-5">
+
+-
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- MOBILE -->
+
+<div id="mobileWallet" class="lg:hidden p-4 space-y-4">
+
+<div class="border rounded-2xl p-5">
+
+<div class="flex justify-between">
+
+<h3 class="font-bold text-[#0B4F63]">
+
+No Transactions
+
+</h3>
+
+<span class="bg-gray-100 px-3 py-1 rounded-full text-xs">
+
+Empty
+
+</span>
+
+</div>
+
+<div class="space-y-2 mt-4">
+
+<p>
+
+<strong>Amount:</strong> ₦0
+
+</p>
+
+<p>
+
+<strong>Reference:</strong> -
+
+</p>
+
+<p>
+
+<strong>Method:</strong> -
+
+</p>
+
+<p>
+
+<strong>Date:</strong> -
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
