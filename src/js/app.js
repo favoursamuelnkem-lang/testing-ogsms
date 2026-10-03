@@ -22,7 +22,7 @@ function ensureToast() {
   toast = document.createElement("div");
   toast.id = "toast";
   toast.className = "fixed top-5 right-5 translate-x-[120%] bg-[#0B4F63] text-white px-5 py-4 rounded-2xl shadow-2xl transition-all duration-300 z-[9999] max-w-sm";
-  toast.innerHTML = '<div class="flex items-start gap-3"><span id="toastIcon" class="text-xl">✓</span><span id="toastMessage"></span></div>';
+  toast.innerHTML = '<div><span id="toastMessage"></span></div>';
   document.body.appendChild(toast);
   return toast;
 }
@@ -30,8 +30,7 @@ function ensureToast() {
 function showToast(message, type = "success") {
   const toast = ensureToast();
   const text = document.getElementById("toastMessage");
-  const icon = document.getElementById("toastIcon");
-
+  
   if (!text) return;
 
   text.innerText = message;
@@ -39,13 +38,10 @@ function showToast(message, type = "success") {
 
   if (type === "error") {
     toast.classList.add("bg-red-500");
-    if (icon) icon.innerText = "!";
   } else if (type === "warning") {
     toast.classList.add("bg-orange-500");
-    if (icon) icon.innerText = "!";
   } else {
     toast.classList.add("bg-[#0B4F63]");
-    if (icon) icon.innerText = "✓";
   }
 
   toast.classList.remove("translate-x-[120%]");
@@ -102,33 +98,7 @@ if(registerForm){
       registerBtn.disabled = true;
 
       registerBtn.innerHTML = `
-        <span class="inline-flex items-center justify-center gap-2">
-
-          <svg
-            class="animate-spin h-5 w-5"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-
-            <circle
-              class="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              stroke-width="4"
-            ></circle>
-
-            <path
-              class="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-            ></path>
-
-          </svg>
-
-          Creating account...
+        <span class="inline-flex items-center justify-center gap-2"> Creating account...
 
         </span>
       `;
@@ -258,33 +228,7 @@ if(loginForm){
       loginBtn.disabled = true;
 
       loginBtn.innerHTML = `
-        <span class="inline-flex items-center justify-center gap-2">
-
-          <svg
-            class="animate-spin h-5 w-5"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-
-            <circle
-              class="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              stroke-width="4"
-            ></circle>
-
-            <path
-              class="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-            ></path>
-
-          </svg>
-
-          Logging in...
+        <span class="inline-flex items-center justify-center gap-2"> Logging in...
 
         </span>
       `;
@@ -525,13 +469,13 @@ function setAmount(amount){
 
 async function verifyPayment(tx_id, amount) {
 
-  console.log("📡 VERIFY PAYMENT CALLED");
+  console.log("SMS VERIFY PAYMENT CALLED");
   console.log("TX_ID:", tx_id);
   console.log("AMOUNT:", amount);
 
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-  console.log("👤 CURRENT USER:", currentUser);
+  console.log("Account CURRENT USER:", currentUser);
 
   if (!currentUser) {
     console.log("❌ No user found");
@@ -544,7 +488,7 @@ async function verifyPayment(tx_id, amount) {
     transaction_id: tx_id
   };
 
-  console.log("📤 SENDING TO BACKEND:", payload);
+  console.log("Sent SENDING TO BACKEND:", payload);
 
   const res = await fetch(`${API_URL}/update-wallet`, {
     method: "POST",
@@ -554,7 +498,7 @@ async function verifyPayment(tx_id, amount) {
 
   const data = await res.json();
 
-  console.log("📥 BACKEND RESPONSE:", data);
+  console.log("Received BACKEND RESPONSE:", data);
 
   if (data.success) {
     console.log("✅ WALLET UPDATED SUCCESSFULLY");
@@ -608,33 +552,7 @@ function makePayment(){
   fundWalletBtn.disabled = true;
 
   fundWalletBtn.innerHTML = `
-    <span class="inline-flex items-center justify-center gap-2">
-
-      <svg
-        class="animate-spin h-5 w-5"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-
-        <circle
-          class="opacity-25"
-          cx="12"
-          cy="12"
-          r="10"
-          stroke="currentColor"
-          stroke-width="4"
-        ></circle>
-
-        <path
-          class="opacity-75"
-          fill="currentColor"
-          d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-        ></path>
-
-      </svg>
-
-      Opening Payment...
+    <span class="inline-flex items-center justify-center gap-2"> Opening Payment...
 
     </span>
   `;
@@ -707,30 +625,7 @@ function makePayment(){
 
         // PAYMENT RECEIVED
         fundWalletBtn.innerHTML = `
-          <span class="inline-flex items-center justify-center gap-2">
-            <svg
-              class="animate-spin h-5 w-5"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <circle
-                class="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                stroke-width="4"
-              ></circle>
-
-              <path
-                class="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-              ></path>
-            </svg>
-
-            Processing Payment...
+          <span class="inline-flex items-center justify-center gap-2"> Processing Payment...
 
           </span>
         `;
@@ -1241,7 +1136,7 @@ if(mobileOrders){
     <div class="bg-gray-50 p-4 rounded-xl border">
 
       <p class="font-semibold text-gray-800">
-        ${item.country || "🌍"} • ${item.service}
+        ${item.country || "Global"} • ${item.service}
       </p>
 
       <p class="text-gray-600 mt-1">
@@ -1267,7 +1162,7 @@ if(mobileOrders){
       <tr class="border-b">
 
         <td class="py-6">
-          🌍
+          Global
         </td>
 
         <td>
@@ -1367,7 +1262,7 @@ async function loadTransactionHistory() {
           <div class="flex items-center gap-4">
 
             <div class="w-12 h-12 rounded-2xl bg-green-50 flex items-center justify-center text-2xl">
-              💰
+              Wallet
             </div>
 
             <div>
