@@ -18,7 +18,7 @@ const HERO_API_KEY = process.env.HERO_API_KEY;
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const FROM_EMAIL = process.env.FROM_EMAIL || "OGSMS <support@getogsms.com>";
-const APP_BASE_URL = (process.env.APP_BASE_URL || "https://testing-ogsms-src.vercel.app").replace(/\/$/, "");
+const APP_BASE_URL = (process.env.APP_BASE_URL || "http://localhost:5000").replace(/\/$/, "");
 
 async function sendResendEmail({ to, subject, html }) {
   if (!RESEND_API_KEY) {
@@ -131,7 +131,8 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve the OGSMS frontend assets during development.
+// Serve the OGSMS frontend locally so the entire project can be tested at:
+// http://localhost:5000
 app.use(express.static(path.join(__dirname, "../src")));
 
 

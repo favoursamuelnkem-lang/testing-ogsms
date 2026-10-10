@@ -3,7 +3,7 @@ if (localStorage.getItem("adminLoggedIn") !== "true") {
     window.location.href = "admin-login.html";
 
 }
-const API_URL = window.OGSMS_API_URL || "https://testing-ogsms.onrender.com";
+const API_URL = window.OGSMS_API_URL || "";
 
 async function loadPayments() {
 

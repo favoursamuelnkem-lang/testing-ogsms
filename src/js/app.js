@@ -863,14 +863,32 @@ async function loadCountries() {
 
         countrySelect.innerHTML = "";
 
+        const countryFlags = {
+          "usa": "🇺🇸", "united states": "🇺🇸", "us": "🇺🇸",
+          "uk": "🇬🇧", "united kingdom": "🇬🇧", "great britain": "🇬🇧",
+          "canada": "🇨🇦", "germany": "🇩🇪", "france": "🇫🇷",
+          "brazil": "🇧🇷", "netherlands": "🇳🇱", "holland": "🇳🇱",
+          "australia": "🇦🇺", "russia": "🇷🇺", "india": "🇮🇳",
+          "spain": "🇪🇸", "italy": "🇮🇹", "nigeria": "🇳🇬",
+          "poland": "🇵🇱", "sweden": "🇸🇪", "turkey": "🇹🇷",
+          "indonesia": "🇮🇩", "japan": "🇯🇵", "mexico": "🇲🇽",
+          "argentina": "🇦🇷", "ukraine": "🇺🇦", "romania": "🇷🇴",
+          "south africa": "🇿🇦", "ghana": "🇬🇭", "kenya": "🇰🇪",
+          "philippines": "🇵🇭", "vietnam": "🇻🇳", "thailand": "🇹🇭",
+          "israel": "🇮🇱", "portugal": "🇵🇹", "belgium": "🇧🇪",
+          "switzerland": "🇨🇭", "austria": "🇦🇹", "ireland": "🇮🇪",
+          "new zealand": "🇳🇿", "czech republic": "🇨🇿", "czechia": "🇨🇿",
+          "hong kong": "🇭🇰", "singapore": "🇸🇬", "south korea": "🇰🇷",
+          "korea": "🇰🇷", "china": "🇨🇳", "egypt": "🇪🇬",
+          "colombia": "🇨🇴", "chile": "🇨🇱", "peru": "🇵🇪",
+          "malaysia": "🇲🇾", "pakistan": "🇵🇰", "bangladesh": "🇧🇩"
+        };
+
         data.countries.forEach(country => {
-
+            const flag = countryFlags[String(country).trim().toLowerCase()] || "🌐";
             countrySelect.innerHTML += `
-                <option value="${country}">
-                    ${country}
-                </option>
+                <option value="${country}">${flag}  ${country}</option>
             `;
-
         });
 
         loadPrice();
