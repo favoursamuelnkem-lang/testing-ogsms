@@ -864,32 +864,31 @@ async function loadCountries() {
         countrySelect.innerHTML = "";
 
         const countryFlags = {
-          "usa":"🇺🇸","united states":"🇺🇸","us":"🇺🇸","us usa":"🇺🇸","usa united states":"🇺🇸",
-          "uk":"🇬🇧","united kingdom":"🇬🇧","great britain":"🇬🇧","gb uk":"🇬🇧","gb united kingdom":"🇬🇧",
-          "canada":"🇨🇦","ca canada":"🇨🇦","germany":"🇩🇪","de germany":"🇩🇪","france":"🇫🇷","fr france":"🇫🇷",
-          "brazil":"🇧🇷","br brazil":"🇧🇷","netherlands":"🇳🇱","holland":"🇳🇱","nl netherlands":"🇳🇱",
-          "australia":"🇦🇺","au australia":"🇦🇺","russia":"🇷🇺","ru russia":"🇷🇺","india":"🇮🇳","in india":"🇮🇳",
-          "spain":"🇪🇸","es spain":"🇪🇸","italy":"🇮🇹","it italy":"🇮🇹","nigeria":"🇳🇬","ng nigeria":"🇳🇬",
-          "poland":"🇵🇱","sweden":"🇸🇪","turkey":"🇹🇷","indonesia":"🇮🇩","id indonesia":"🇮🇩","japan":"🇯🇵",
-          "mexico":"🇲🇽","argentina":"🇦🇷","ukraine":"🇺🇦","romania":"🇷🇴","south africa":"🇿🇦","za south africa":"🇿🇦",
-          "ghana":"🇬🇭","kenya":"🇰🇪","philippines":"🇵🇭","vietnam":"🇻🇳","thailand":"🇹🇭","israel":"🇮🇱",
-          "portugal":"🇵🇹","belgium":"🇧🇪","switzerland":"🇨🇭","austria":"🇦🇹","ireland":"🇮🇪","new zealand":"🇳🇿",
-          "czech republic":"🇨🇿","czechia":"🇨🇿","hong kong":"🇭🇰","singapore":"🇸🇬","south korea":"🇰🇷",
-          "korea":"🇰🇷","china":"🇨🇳","egypt":"🇪🇬","colombia":"🇨🇴","chile":"🇨🇱","peru":"🇵🇪",
-          "malaysia":"🇲🇾","pakistan":"🇵🇰","bangladesh":"🇧🇩"
+          "usa": "🇺🇸", "united states": "🇺🇸", "us": "🇺🇸",
+          "uk": "🇬🇧", "united kingdom": "🇬🇧", "great britain": "🇬🇧",
+          "canada": "🇨🇦", "germany": "🇩🇪", "france": "🇫🇷",
+          "brazil": "🇧🇷", "netherlands": "🇳🇱", "holland": "🇳🇱",
+          "australia": "🇦🇺", "russia": "🇷🇺", "india": "🇮🇳",
+          "spain": "🇪🇸", "italy": "🇮🇹", "nigeria": "🇳🇬",
+          "poland": "🇵🇱", "sweden": "🇸🇪", "turkey": "🇹🇷",
+          "indonesia": "🇮🇩", "japan": "🇯🇵", "mexico": "🇲🇽",
+          "argentina": "🇦🇷", "ukraine": "🇺🇦", "romania": "🇷🇴",
+          "south africa": "🇿🇦", "ghana": "🇬🇭", "kenya": "🇰🇪",
+          "philippines": "🇵🇭", "vietnam": "🇻🇳", "thailand": "🇹🇭",
+          "israel": "🇮🇱", "portugal": "🇵🇹", "belgium": "🇧🇪",
+          "switzerland": "🇨🇭", "austria": "🇦🇹", "ireland": "🇮🇪",
+          "new zealand": "🇳🇿", "czech republic": "🇨🇿", "czechia": "🇨🇿",
+          "hong kong": "🇭🇰", "singapore": "🇸🇬", "south korea": "🇰🇷",
+          "korea": "🇰🇷", "china": "🇨🇳", "egypt": "🇪🇬",
+          "colombia": "🇨🇴", "chile": "🇨🇱", "peru": "🇵🇪",
+          "malaysia": "🇲🇾", "pakistan": "🇵🇰", "bangladesh": "🇧🇩"
         };
 
-        function getCountryFlag(country) {
-          const key = String(country || "").trim().toLowerCase().replace(/[_-]+/g, " ").replace(/\\s+/g, " ");
-          if (countryFlags[key]) return countryFlags[key];
-          const firstCode = key.match(/^([a-z]{2})\\s+/)?.[1];
-          const codeFlags = { ca:"🇨🇦", id:"🇮🇩", za:"🇿🇦", gb:"🇬🇧", us:"🇺🇸", de:"🇩🇪", fr:"🇫🇷", br:"🇧🇷", nl:"🇳🇱", au:"🇦🇺", ru:"🇷🇺", in:"🇮🇳", es:"🇪🇸", it:"🇮🇹", ng:"🇳🇬", pl:"🇵🇱", se:"🇸🇪", tr:"🇹🇷", jp:"🇯🇵", mx:"🇲🇽", ar:"🇦🇷", ua:"🇺🇦", ro:"🇷🇴", gh:"🇬🇭", ke:"🇰🇪", ph:"🇵🇭", vn:"🇻🇳", th:"🇹🇭", il:"🇮🇱", pt:"🇵🇹", be:"🇧🇪", ch:"🇨🇭", at:"🇦🇹", ie:"🇮🇪", nz:"🇳🇿", hk:"🇭🇰", sg:"🇸🇬", kr:"🇰🇷", cn:"🇨🇳", eg:"🇪🇬", co:"🇨🇴", cl:"🇨🇱", pe:"🇵🇪", my:"🇲🇾", pk:"🇵🇰", bd:"🇧🇩" };
-          return codeFlags[firstCode] || "🌐";
-        }
-
         data.countries.forEach(country => {
-            const flag = getCountryFlag(country);
-            countrySelect.insertAdjacentHTML("beforeend", `<option value="${String(country).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;")}">${flag}  ${country}</option>`);
+            const flag = countryFlags[String(country).trim().toLowerCase()] || "🌐";
+            countrySelect.innerHTML += `
+                <option value="${country}">${flag}  ${country}</option>
+            `;
         });
 
         loadPrice();

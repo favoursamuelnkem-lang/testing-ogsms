@@ -102,13 +102,7 @@
   const flagByCountry = {
     'usa':'🇺🇸','united states':'🇺🇸','us':'🇺🇸','uk':'🇬🇧','united kingdom':'🇬🇧','great britain':'🇬🇧','canada':'🇨🇦','germany':'🇩🇪','france':'🇫🇷','brazil':'🇧🇷','netherlands':'🇳🇱','holland':'🇳🇱','australia':'🇦🇺','russia':'🇷🇺','india':'🇮🇳','spain':'🇪🇸','italy':'🇮🇹','nigeria':'🇳🇬','poland':'🇵🇱','sweden':'🇸🇪','turkey':'🇹🇷','indonesia':'🇮🇩','japan':'🇯🇵','mexico':'🇲🇽','argentina':'🇦🇷','ukraine':'🇺🇦','romania':'🇷🇴','south africa':'🇿🇦','ghana':'🇬🇭','kenya':'🇰🇪','philippines':'🇵🇭','vietnam':'🇻🇳','thailand':'🇹🇭','israel':'🇮🇱','portugal':'🇵🇹','belgium':'🇧🇪','switzerland':'🇨🇭','austria':'🇦🇹','ireland':'🇮🇪','new zealand':'🇳🇿','czech republic':'🇨🇿','czechia':'🇨🇿','hong kong':'🇭🇰','singapore':'🇸🇬','south korea':'🇰🇷','korea':'🇰🇷','china':'🇨🇳','egypt':'🇪🇬','colombia':'🇨🇴','chile':'🇨🇱','peru':'🇵🇪','malaysia':'🇲🇾','pakistan':'🇵🇰','bangladesh':'🇧🇩'
   };
-  function countryFlag(name){
-    const key = String(name || '').trim().toLowerCase().replace(/[_-]+/g, ' ').replace(/\\s+/g, ' ');
-    if (flagByCountry[key]) return flagByCountry[key];
-    const code = key.match(/^([a-z]{2})\\s+/)?.[1];
-    const codeFlags = {ca:'🇨🇦',id:'🇮🇩',za:'🇿🇦',gb:'🇬🇧',us:'🇺🇸',de:'🇩🇪',fr:'🇫🇷',br:'🇧🇷',nl:'🇳🇱',au:'🇦🇺',ru:'🇷🇺',in:'🇮🇳',es:'🇪🇸',it:'🇮🇹',ng:'🇳🇬',pl:'🇵🇱',se:'🇸🇪',tr:'🇹🇷',jp:'🇯🇵',mx:'🇲🇽',ar:'🇦🇷',ua:'🇺🇦',ro:'🇷🇴',gh:'🇬🇭',ke:'🇰🇪',ph:'🇵🇭',vn:'🇻🇳',th:'🇹🇭',il:'🇮🇱',pt:'🇵🇹',be:'🇧🇪',ch:'🇨🇭',at:'🇦🇹',ie:'🇮🇪',nz:'🇳🇿',hk:'🇭🇰',sg:'🇸🇬',kr:'🇰🇷',cn:'🇨🇳',eg:'🇪🇬',co:'🇨🇴',cl:'🇨🇱',pe:'🇵🇪',my:'🇲🇾',pk:'🇵🇰',bd:'🇧🇩'};
-    return codeFlags[code] || '🌐';
-  }
+  function countryFlag(name){ return flagByCountry[String(name||'').trim().toLowerCase()] || '🌐'; }
   function renderCountryDirectory(){
     const select = document.getElementById('country');
     const directory = document.getElementById('countryDirectory');
