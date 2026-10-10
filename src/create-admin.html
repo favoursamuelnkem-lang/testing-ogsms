@@ -1,38 +1,55 @@
 <!DOCTYPE html>
-<html>
-<body>
-
-<button onclick="createAdmin()">Create Admin</button>
-
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OGSMS Admin Setup</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/ogsms-modern.css">
+</head>
+<body class="auth-page">
+<main class="auth-shell">
+  <a class="auth-logo" href="index.html">OGSMS</a>
+  <section class="auth-card mt-6">
+    <h1 class="text-2xl font-bold mb-2">Admin setup</h1>
+    <p class="text-sm text-gray-500 mb-6">Enter the admin credentials configured for your backend.</p>
+    <form id="setupForm" class="space-y-4">
+      <label class="block text-sm font-semibold">Username<input id="username" autocomplete="username" required class="ogsms-input mt-2" /></label>
+      <label class="block text-sm font-semibold">Password<input id="password" type="password" autocomplete="new-password" required class="ogsms-input mt-2" /></label>
+      <button id="submitBtn" class="ogsms-primary-btn w-full" type="submit">Create admin</button>
+      <p id="result" class="text-sm" role="status"></p>
+    </form>
+  </section>
+</main>
 <script>
-
-async function createAdmin(){
-
-    const response = await fetch("/admin/create-admin",{
-
-        method:"POST",
-
-        headers:{
-            "Content-Type":"application/json"
-        },
-
-        body:JSON.stringify({
-
-            username:"ognation",
-
-            password:"daysmith"
-
-        })
-
+const API_URL = window.OGSMS_API_URL || "https://testing-ogsms.onrender.com";
+document.getElementById("setupForm").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const button = document.getElementById("submitBtn");
+  const result = document.getElementById("result");
+  button.disabled = true;
+  button.textContent = "Please wait...";
+  result.textContent = "";
+  try {
+    const response = await fetch(`${API_URL}/admin/create-admin`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: document.getElementById("username").value.trim(),
+        password: document.getElementById("password").value
+      })
     });
-
     const data = await response.json();
-
-    alert(JSON.stringify(data));
-
-}
-
+    result.textContent = data.message || (response.ok ? "Request completed." : "Could not create admin.");
+    result.className = "text-sm " + (response.ok ? "text-teal-700" : "text-red-600");
+  } catch (error) {
+    result.textContent = "Could not connect to the OGSMS server. Please try again.";
+    result.className = "text-sm text-red-600";
+  } finally {
+    button.disabled = false;
+    button.textContent = "Create admin";
+  }
+});
 </script>
-
 </body>
 </html>
