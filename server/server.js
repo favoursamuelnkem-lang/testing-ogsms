@@ -55,11 +55,9 @@ async function sendWelcomeEmail(user) {
     to: user.email,
     subject: "Welcome back to OGSMS",
     html: `
-      <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:24px;color:#17323a">
-        <div style="text-align:center;padding:18px 0 22px">
-          <img src="${OGSMS_LOGO_URL}" alt="OGSMS logo" width="120" style="display:block;width:120px;max-width:100%;height:auto;margin:0 auto 18px;border:0" />
-        </div>
-        <div style="background:#0B4F63;color:#fff;padding:22px;border-radius:16px 16px 0 0">
+      <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;color:#17323a;border:1px solid #e5e7eb;border-radius:16px;overflow:hidden">
+        <div style="background:#0B4F63;color:#fff;padding:24px;text-align:center">
+          <img src="${OGSMS_LOGO_URL}" alt="OGSMS logo" width="90" style="display:block;width:90px;max-width:100%;height:auto;margin:0 auto 16px;border:0" />
           <h1 style="margin:0;font-size:26px">Welcome back to OGSMS</h1>
         </div>
         <div style="padding:24px;border:1px solid #e5e7eb;border-top:0;border-radius:0 0 16px 16px">
@@ -80,12 +78,13 @@ async function sendRegistrationWelcomeEmail(user) {
     to: user.email,
     subject: "Welcome to OGSMS",
     html: `
-      <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:24px;color:#17323a">
-        <div style="text-align:center;padding:18px 0 22px;border-bottom:1px solid #e5e7eb">
-          <img src="${OGSMS_LOGO_URL}" alt="OGSMS logo" width="120" style="display:block;width:120px;max-width:100%;height:auto;margin:0 auto;border:0" />
+      <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;color:#17323a;border:1px solid #e5e7eb;border-radius:16px;overflow:hidden">
+        <div style="background:#0B4F63;color:#fff;padding:24px;text-align:center">
+          <img src="${OGSMS_LOGO_URL}" alt="OGSMS logo" width="90" style="display:block;width:90px;max-width:100%;height:auto;margin:0 auto 16px;border:0" />
+          <h1 style="margin:0;font-size:26px">Welcome to OGSMS</h1>
         </div>
-        <div style="padding:28px 4px">
-          <h1 style="margin:0 0 12px;font-size:26px;color:#0B4F63">Welcome to OGSMS, ${escapeHtml(name)}</h1>
+        <div style="padding:28px 24px">
+          <h2 style="margin:0 0 12px;font-size:22px;color:#0B4F63">Hello ${escapeHtml(name)}</h2>
           <p style="font-size:15px;line-height:1.7;color:#52636B">Your account has been created successfully. You can now fund your wallet, purchase foreign numbers and manage incoming SMS from your OGSMS dashboard.</p>
           <a href="${APP_BASE_URL}/dashboard.html" style="display:inline-block;background:#F97316;color:#fff;text-decoration:none;padding:12px 18px;border-radius:8px;font-weight:700;margin-top:10px">Open OGSMS</a>
         </div>
@@ -109,11 +108,9 @@ async function sendPasswordResetEmail(user, resetUrl) {
     to: user.email,
     subject: "Reset your OGSMS password",
     html: `
-      <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:24px;color:#17323a">
-        <div style="text-align:center;padding:18px 0 22px">
-          <img src="${OGSMS_LOGO_URL}" alt="OGSMS logo" width="120" style="display:block;width:120px;max-width:100%;height:auto;margin:0 auto 18px;border:0" />
-        </div>
-        <div style="background:#0B4F63;color:#fff;padding:22px;border-radius:16px 16px 0 0">
+      <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;color:#17323a;border:1px solid #e5e7eb;border-radius:16px;overflow:hidden">
+        <div style="background:#0B4F63;color:#fff;padding:24px;text-align:center">
+          <img src="${OGSMS_LOGO_URL}" alt="OGSMS logo" width="90" style="display:block;width:90px;max-width:100%;height:auto;margin:0 auto 16px;border:0" />
           <h1 style="margin:0;font-size:26px">Password Reset</h1>
         </div>
         <div style="padding:24px;border:1px solid #e5e7eb;border-top:0;border-radius:0 0 16px 16px">
