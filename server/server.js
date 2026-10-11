@@ -18,6 +18,7 @@ const HERO_API_KEY = process.env.HERO_API_KEY;
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const FROM_EMAIL = process.env.FROM_EMAIL || "OGSMS <support@getogsms.com>";
+const OGSMS_LOGO_URL = (process.env.OGSMS_LOGO_URL || "https://getogsms.com/ogsms-bimi.svg").trim();
 const APP_BASE_URL = (process.env.APP_BASE_URL || "http://localhost:5000").replace(/\/$/, "");
 
 async function sendResendEmail({ to, subject, html }) {
@@ -55,6 +56,9 @@ async function sendWelcomeEmail(user) {
     subject: "Welcome back to OGSMS",
     html: `
       <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:24px;color:#17323a">
+        <div style="text-align:center;padding:18px 0 22px">
+          <img src="${OGSMS_LOGO_URL}" alt="OGSMS logo" width="120" style="display:block;width:120px;max-width:100%;height:auto;margin:0 auto 18px;border:0" />
+        </div>
         <div style="background:#0B4F63;color:#fff;padding:22px;border-radius:16px 16px 0 0">
           <h1 style="margin:0;font-size:26px">Welcome back to OGSMS</h1>
         </div>
@@ -77,8 +81,8 @@ async function sendRegistrationWelcomeEmail(user) {
     subject: "Welcome to OGSMS",
     html: `
       <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:24px;color:#17323a">
-        <div style="padding-bottom:18px;border-bottom:1px solid #e5e7eb">
-          <div style="font-size:24px;font-weight:800;color:#0B4F63">OGSMS</div>
+        <div style="text-align:center;padding:18px 0 22px;border-bottom:1px solid #e5e7eb">
+          <img src="${OGSMS_LOGO_URL}" alt="OGSMS logo" width="120" style="display:block;width:120px;max-width:100%;height:auto;margin:0 auto;border:0" />
         </div>
         <div style="padding:28px 4px">
           <h1 style="margin:0 0 12px;font-size:26px;color:#0B4F63">Welcome to OGSMS, ${escapeHtml(name)}</h1>
@@ -106,6 +110,9 @@ async function sendPasswordResetEmail(user, resetUrl) {
     subject: "Reset your OGSMS password",
     html: `
       <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:24px;color:#17323a">
+        <div style="text-align:center;padding:18px 0 22px">
+          <img src="${OGSMS_LOGO_URL}" alt="OGSMS logo" width="120" style="display:block;width:120px;max-width:100%;height:auto;margin:0 auto 18px;border:0" />
+        </div>
         <div style="background:#0B4F63;color:#fff;padding:22px;border-radius:16px 16px 0 0">
           <h1 style="margin:0;font-size:26px">Password Reset</h1>
         </div>
