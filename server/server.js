@@ -53,7 +53,7 @@ async function sendWelcomeEmail(user) {
   const name = user.fullName || "there";
   return sendResendEmail({
     to: user.email,
-    subject: "Welcome back to OGSMS",
+    subject: "OGSMS sign-in notification",
     html: `
       <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;color:#17323a;border:1px solid #e5e7eb;border-radius:16px;overflow:hidden">
         <div style="background:#0B4F63;color:#fff;padding:16px 22px 22px">
