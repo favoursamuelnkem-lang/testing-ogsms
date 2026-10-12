@@ -56,9 +56,14 @@ async function sendWelcomeEmail(user) {
     subject: "Welcome back to OGSMS",
     html: `
       <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;color:#17323a;border:1px solid #e5e7eb;border-radius:16px;overflow:hidden">
-        <div style="background:#0B4F63;color:#fff;padding:24px;text-align:center">
-          <img src="${OGSMS_LOGO_URL}" alt="OGSMS logo" width="90" style="display:block;width:90px;max-width:100%;height:auto;margin:0 auto 16px;border:0" />
-          <h1 style="margin:0;font-size:26px">Welcome back to OGSMS</h1>
+        <div style="background:#0B4F63;color:#fff;padding:16px 22px 22px">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse">
+            <tr>
+              <td align="left" valign="middle" style="font-size:22px;line-height:28px;font-weight:700;color:#fff;font-family:Arial,sans-serif">OG<span style="color:#F97316">SMS</span></td>
+              <td align="right" valign="middle" style="width:36px"><img src="${OGSMS_LOGO_URL}" alt="OGSMS logo" width="32" height="32" style="display:block;width:32px;height:32px;max-width:32px;border:0;border-radius:50%;object-fit:contain;background:#fff" /></td>
+            </tr>
+            <tr><td colspan="2" style="padding-top:18px"><h1 style="margin:0;font-size:26px;line-height:32px;text-align:center;color:#fff">Welcome back to OGSMS</h1></td></tr>
+          </table>
         </div>
         <div style="padding:24px;border:1px solid #e5e7eb;border-top:0;border-radius:0 0 16px 16px">
           <p>Hello ${escapeHtml(name)},</p>
@@ -79,9 +84,14 @@ async function sendRegistrationWelcomeEmail(user) {
     subject: "Welcome to OGSMS",
     html: `
       <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;color:#17323a;border:1px solid #e5e7eb;border-radius:16px;overflow:hidden">
-        <div style="background:#0B4F63;color:#fff;padding:24px;text-align:center">
-          <img src="${OGSMS_LOGO_URL}" alt="OGSMS logo" width="90" style="display:block;width:90px;max-width:100%;height:auto;margin:0 auto 16px;border:0" />
-          <h1 style="margin:0;font-size:26px">Welcome to OGSMS</h1>
+        <div style="background:#0B4F63;color:#fff;padding:16px 22px 22px">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse">
+            <tr>
+              <td align="left" valign="middle" style="font-size:22px;line-height:28px;font-weight:700;color:#fff;font-family:Arial,sans-serif">OG<span style="color:#F97316">SMS</span></td>
+              <td align="right" valign="middle" style="width:36px"><img src="${OGSMS_LOGO_URL}" alt="OGSMS logo" width="32" height="32" style="display:block;width:32px;height:32px;max-width:32px;border:0;border-radius:50%;object-fit:contain;background:#fff" /></td>
+            </tr>
+            <tr><td colspan="2" style="padding-top:18px"><h1 style="margin:0;font-size:26px;line-height:32px;text-align:center;color:#fff">Welcome to OGSMS</h1></td></tr>
+          </table>
         </div>
         <div style="padding:28px 24px">
           <h2 style="margin:0 0 12px;font-size:22px;color:#0B4F63">Hello ${escapeHtml(name)}</h2>
@@ -109,9 +119,14 @@ async function sendPasswordResetEmail(user, resetUrl) {
     subject: "Reset your OGSMS password",
     html: `
       <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;color:#17323a;border:1px solid #e5e7eb;border-radius:16px;overflow:hidden">
-        <div style="background:#0B4F63;color:#fff;padding:24px;text-align:center">
-          <img src="${OGSMS_LOGO_URL}" alt="OGSMS logo" width="90" style="display:block;width:90px;max-width:100%;height:auto;margin:0 auto 16px;border:0" />
-          <h1 style="margin:0;font-size:26px">Password Reset</h1>
+        <div style="background:#0B4F63;color:#fff;padding:16px 22px 22px">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse">
+            <tr>
+              <td align="left" valign="middle" style="font-size:22px;line-height:28px;font-weight:700;color:#fff;font-family:Arial,sans-serif">OG<span style="color:#F97316">SMS</span></td>
+              <td align="right" valign="middle" style="width:36px"><img src="${OGSMS_LOGO_URL}" alt="OGSMS logo" width="32" height="32" style="display:block;width:32px;height:32px;max-width:32px;border:0;border-radius:50%;object-fit:contain;background:#fff" /></td>
+            </tr>
+            <tr><td colspan="2" style="padding-top:18px"><h1 style="margin:0;font-size:26px;line-height:32px;text-align:center;color:#fff">Password Reset</h1></td></tr>
+          </table>
         </div>
         <div style="padding:24px;border:1px solid #e5e7eb;border-top:0;border-radius:0 0 16px 16px">
           <p>Hello ${escapeHtml(name)},</p>
