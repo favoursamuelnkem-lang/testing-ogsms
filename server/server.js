@@ -269,6 +269,37 @@ const adminSchema = new mongoose.Schema({
 
 const Admin = mongoose.model("Admin", adminSchema);
 
+// Short-lived in-memory admin sessions used by protected wallet-management routes.
+// An admin must log in again after a server restart.
+const adminSessions = new Map();
+const ADMIN_SESSION_TTL_MS = 12 * 60 * 60 * 1000;
+
+function requireAdminSession(req, res, next) {
+  const authorization = String(req.headers.authorization || "");
+  const token = authorization.startsWith("Bearer ") ? authorization.slice(7).trim() : "";
+  const session = token ? adminSessions.get(token) : null;
+
+  if (!session || session.expiresAt <= Date.now()) {
+    if (token) adminSessions.delete(token);
+    return res.status(401).json({ success: false, message: "Admin session expired. Please log in again." });
+  }
+
+  next();
+}
+
+const adminWalletAdjustmentSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, required: true, index: true },
+  userEmail: { type: String, required: true, index: true },
+  adminUsername: { type: String, required: true },
+  action: { type: String, enum: ["credit", "debit"], required: true },
+  amount: { type: Number, required: true, min: 0.01 },
+  balanceBefore: { type: Number, required: true },
+  balanceAfter: { type: Number, required: true },
+  reason: { type: String, required: true, maxlength: 300 },
+  createdAt: { type: Date, default: Date.now }
+});
+const AdminWalletAdjustment = mongoose.model("AdminWalletAdjustment", adminWalletAdjustmentSchema);
+
 
 
 // ======================
@@ -1611,6 +1642,102 @@ app.get("/countries", async (req, res) => {
 
 
 // ======================
+// ADMIN WALLET MANAGEMENT (protected)
+// ======================
+app.get("/admin/wallet/users", requireAdminSession, async (req, res) => {
+  try {
+    const q = String(req.query.q || "").trim();
+    const filter = q ? {
+      $or: [
+        { email: { $regex: q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), $options: "i" } },
+        { fullName: { $regex: q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), $options: "i" } }
+      ]
+    } : {};
+    const users = await User.find(filter).select("fullName email balance createdAt").sort({ createdAt: -1 }).limit(100);
+    return res.json({ success: true, users });
+  } catch (error) {
+    console.error("ADMIN WALLET USERS ERROR:", error.message);
+    return res.status(500).json({ success: false, message: "Could not load users." });
+  }
+});
+
+app.get("/admin/wallet/transactions", requireAdminSession, async (req, res) => {
+  try {
+    const email = String(req.query.email || "").trim().toLowerCase();
+    const filter = email ? { userEmail: email } : {};
+    const transactions = await AdminWalletAdjustment.find(filter).sort({ createdAt: -1 }).limit(100);
+    return res.json({ success: true, transactions });
+  } catch (error) {
+    console.error("ADMIN WALLET TRANSACTIONS ERROR:", error.message);
+    return res.status(500).json({ success: false, message: "Could not load wallet history." });
+  }
+});
+
+app.post("/admin/wallet/adjust", requireAdminSession, async (req, res) => {
+  try {
+    const email = String(req.body.email || "").trim().toLowerCase();
+    const action = String(req.body.action || "").trim().toLowerCase();
+    const amount = Number(req.body.amount);
+    const reason = String(req.body.reason || "").trim();
+    const adminUsername = String(req.body.adminUsername || "admin").trim().slice(0, 120);
+
+    if (!email || !["credit", "debit"].includes(action) || !Number.isFinite(amount) || amount <= 0 || amount > 1000000000 || !reason || reason.length > 300) {
+      return res.status(400).json({ success: false, message: "Enter a valid email, action, positive amount, and reason (max 300 characters)." });
+    }
+
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ success: false, message: "No user was found with that email." });
+
+    const balanceBefore = Number(user.balance || 0);
+    let updatedUser;
+    if (action === "credit") {
+      updatedUser = await User.findOneAndUpdate(
+        { _id: user._id },
+        { $inc: { balance: amount } },
+        { new: true }
+      );
+    } else {
+      updatedUser = await User.findOneAndUpdate(
+        { _id: user._id, balance: { $gte: amount } },
+        { $inc: { balance: -amount } },
+        { new: true }
+      );
+      if (!updatedUser) {
+        return res.status(400).json({ success: false, message: "Insufficient wallet balance. The balance was not changed." });
+      }
+    }
+
+    try {
+      await AdminWalletAdjustment.create({
+        userId: user._id,
+        userEmail: user.email,
+        adminUsername,
+        action,
+        amount,
+        balanceBefore,
+        balanceAfter: Number(updatedUser.balance || 0),
+        reason
+      });
+    } catch (auditError) {
+      // Do not silently leave an unlogged adjustment; compensate the balance change.
+      await User.updateOne({ _id: user._id }, { $inc: { balance: action === "credit" ? -amount : amount } });
+      console.error("ADMIN WALLET AUDIT ERROR:", auditError.message);
+      return res.status(500).json({ success: false, message: "The adjustment could not be recorded, so the balance change was reversed." });
+    }
+
+    return res.json({
+      success: true,
+      message: action === "credit" ? "Wallet credited successfully." : "Wallet debited successfully.",
+      user: { fullName: updatedUser.fullName, email: updatedUser.email, balance: updatedUser.balance },
+      transaction: { action, amount, balanceBefore, balanceAfter: updatedUser.balance, reason, createdAt: new Date() }
+    });
+  } catch (error) {
+    console.error("ADMIN WALLET ADJUST ERROR:", error.message);
+    return res.status(500).json({ success: false, message: "Wallet adjustment failed. Please try again." });
+  }
+});
+
+// ======================
 // ADMIN LOGIN
 // ======================
 
@@ -1634,8 +1761,16 @@ app.post("/admin/login", async (req, res) => {
 
         }
 
+        const token = crypto.randomBytes(32).toString("hex");
+        adminSessions.set(token, {
+            username: admin.username,
+            expiresAt: Date.now() + ADMIN_SESSION_TTL_MS
+        });
+
         res.json({
-            success: true
+            success: true,
+            token,
+            username: admin.username
         });
 
     } catch (err) {

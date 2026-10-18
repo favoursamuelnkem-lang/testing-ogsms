@@ -1,326 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Wallet Funding</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-
-font-family:Inter,sans-serif;
-
-}
-
-body{
-
-background:#f8fafc;
-
-}
-
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage User Wallets | OGSMS Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>body{font-family:Poppins, sans-serif;background:#f8fafc}*{font-family:Poppins,sans-serif}</style>
 </head>
-
-<body>
-
-<div class="p-6 lg:p-10">
-
-<!-- HEADER -->
-
-<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
-
-<div>
-     <a href="admin-dashboard.html">
-    <div class="flex items-center pb-2">
-        
-      <p class="capitalize text-[#0b4f63] font-bold ">back</p>
-    </div>
-   </a> 
-
-<h1 class="text-3xl font-bold text-[#0B4F63]">
-
-Wallet Funding
-
-</h1>
-
-<p class="text-gray-500 mt-2">
-
-Monitor all wallet funding transactions
-
-</p>
-
-</div>
-
-<div class="flex flex-col sm:flex-row gap-3">
-
-<input
-
-type="text"
-
-placeholder="Search customer..."
-
-class="border rounded-xl px-5 py-3 outline-none w-full sm:w-72">
-
-<select
-
-class="border rounded-xl px-5 py-3 outline-none">
-
-<option>All Status</option>
-
-<option>Successful</option>
-
-<option>Pending</option>
-
-<option>Failed</option>
-
-</select>
-
-</div>
-
-</div>
-
-<!-- SUMMARY -->
-
-<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mt-8">
-
-<div class="bg-white rounded-2xl shadow p-6">
-
-<p class="text-gray-500">
-
-Today's Funding
-
-</p>
-
-<h2 class="text-3xl font-bold text-[#0B4F63] mt-2">
-
-₦0
-
-</h2>
-
-</div>
-
-<div class="bg-white rounded-2xl shadow p-6">
-
-<p class="text-gray-500">
-
-This Month
-
-</p>
-
-<h2 class="text-3xl font-bold text-orange-500 mt-2">
-
-₦0
-
-</h2>
-
-</div>
-
-<div class="bg-white rounded-2xl shadow p-6">
-
-<p class="text-gray-500">
-
-Successful
-
-</p>
-
-<h2 class="text-3xl font-bold text-green-600 mt-2">
-
-0
-
-</h2>
-
-</div>
-
-<div class="bg-white rounded-2xl shadow p-6">
-
-<p class="text-gray-500">
-
-Failed
-
-</p>
-
-<h2 class="text-3xl font-bold text-red-500 mt-2">
-
-0
-
-</h2>
-
-</div>
-
-</div>
-
-<!-- TABLE -->
-
-<div class="bg-white rounded-2xl shadow mt-8 overflow-hidden">
-
-<div class="hidden lg:block overflow-x-auto">
-
-<table class="w-full">
-
-<thead class="bg-gray-100">
-
-<tr>
-
-<th class="px-6 py-4 text-left">
-
-Customer
-
-</th>
-
-<th class="px-6 py-4 text-left">
-
-Amount
-
-</th>
-
-<th class="px-6 py-4 text-left">
-
-Reference
-
-</th>
-
-<th class="px-6 py-4 text-left">
-
-Method
-
-</th>
-
-<th class="px-6 py-4 text-left">
-
-Status
-
-</th>
-
-<th class="px-6 py-4 text-left">
-
-Date
-
-</th>
-
-</tr>
-
-</thead>
-
-<tbody id="walletTable">
-
-<tr class="border-t">
-
-<td class="px-6 py-5">
-
-No Transactions
-
-</td>
-
-<td class="px-6 py-5">
-
-₦0
-
-</td>
-
-<td class="px-6 py-5">
-
--
-
-</td>
-
-<td class="px-6 py-5">
-
--
-
-</td>
-
-<td class="px-6 py-5">
-
-<span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm">
-
-Empty
-
-</span>
-
-</td>
-
-<td class="px-6 py-5">
-
--
-
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-<!-- MOBILE -->
-
-<div id="mobileWallet" class="lg:hidden p-4 space-y-4">
-
-<div class="border rounded-2xl p-5">
-
-<div class="flex justify-between">
-
-<h3 class="font-bold text-[#0B4F63]">
-
-No Transactions
-
-</h3>
-
-<span class="bg-gray-100 px-3 py-1 rounded-full text-xs">
-
-Empty
-
-</span>
-
-</div>
-
-<div class="space-y-2 mt-4">
-
-<p>
-
-<strong>Amount:</strong> ₦0
-
-</p>
-
-<p>
-
-<strong>Reference:</strong> -
-
-</p>
-
-<p>
-
-<strong>Method:</strong> -
-
-</p>
-
-<p>
-
-<strong>Date:</strong> -
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
+<body class="min-h-screen text-slate-800">
+  <header class="bg-[#0B4F63] text-white px-5 py-5 md:px-10 flex flex-wrap gap-4 items-center justify-between">
+    <div><a href="admin-dashboard.html" class="text-orange-300 text-sm font-semibold">← Back to admin dashboard</a><h1 class="text-2xl md:text-3xl font-bold mt-2">Manage User Wallets</h1><p class="text-white/75 text-sm mt-1">Credit or debit a user's OGSMS balance and keep an audit record.</p></div>
+    <div class="text-sm rounded-xl bg-white/10 px-4 py-3">Admin: <span id="adminName" class="font-semibold">Administrator</span></div>
+  </header>
+  <main class="max-w-7xl mx-auto p-4 md:p-8 space-y-6">
+    <div id="notice" class="hidden rounded-xl p-4 text-sm" role="status"></div>
+    <section class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+      <div class="lg:col-span-3 bg-white rounded-2xl shadow-sm border border-slate-100 p-5 md:p-7">
+        <h2 class="text-xl font-bold text-[#0B4F63]">Find a user</h2>
+        <p class="text-slate-500 text-sm mt-1">Search by name or email, then select the account to adjust.</p>
+        <div class="flex flex-col sm:flex-row gap-3 mt-5"><input id="searchInput" class="flex-1 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-[#0B4F63]" placeholder="Enter user email or name"><button id="searchBtn" class="bg-[#0B4F63] hover:bg-[#083d4c] text-white font-semibold rounded-xl px-5 py-3">Search users</button></div>
+        <div id="usersList" class="mt-4 space-y-3"><p class="text-slate-500 text-sm">Loading users…</p></div>
+      </div>
+      <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-slate-100 p-5 md:p-7">
+        <h2 class="text-xl font-bold text-[#0B4F63]">Wallet adjustment</h2>
+        <div id="selectedUser" class="mt-4 rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm text-slate-500">Select a user from the list to begin.</div>
+        <form id="adjustForm" class="mt-5 space-y-4">
+          <input id="userEmail" type="hidden">
+          <div><label for="action" class="block text-sm font-semibold mb-2">Action</label><select id="action" class="w-full border border-slate-200 rounded-xl px-4 py-3"><option value="credit">Add money (Credit)</option><option value="debit">Deduct money (Debit)</option></select></div>
+          <div><label for="amount" class="block text-sm font-semibold mb-2">Amount (₦)</label><input id="amount" type="number" min="0.01" step="0.01" required class="w-full border border-slate-200 rounded-xl px-4 py-3" placeholder="e.g. 2000"></div>
+          <div><label for="reason" class="block text-sm font-semibold mb-2">Reason</label><textarea id="reason" maxlength="300" required rows="3" class="w-full border border-slate-200 rounded-xl px-4 py-3" placeholder="Explain why this adjustment is needed"></textarea><p class="text-xs text-slate-400 mt-1">Required for the transaction record.</p></div>
+          <button id="submitBtn" class="w-full bg-orange-500 hover:bg-orange-600 disabled:opacity-50 text-white font-bold rounded-xl px-5 py-3">Apply adjustment</button>
+        </form>
+      </div>
+    </section>
+    <section class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 md:p-7">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3"><div><h2 class="text-xl font-bold text-[#0B4F63]">Admin adjustment history</h2><p class="text-slate-500 text-sm mt-1">Recent credits and debits performed from this page.</p></div><button id="historyBtn" class="border border-slate-200 rounded-xl px-4 py-2 font-semibold hover:bg-slate-50">Refresh history</button></div>
+      <div class="overflow-x-auto mt-5"><table class="w-full text-sm min-w-[760px]"><thead class="bg-slate-50 text-slate-500"><tr><th class="text-left p-3">Date</th><th class="text-left p-3">User</th><th class="text-left p-3">Action</th><th class="text-left p-3">Amount</th><th class="text-left p-3">Balance after</th><th class="text-left p-3">Reason</th><th class="text-left p-3">Admin</th></tr></thead><tbody id="historyTable"><tr><td colspan="7" class="p-4 text-slate-500">Loading history…</td></tr></tbody></table></div>
+    </section>
+  </main>
+<script>
+const API_URL = window.OGSMS_API_URL || "";
+const token = localStorage.getItem("ogsmsAdminToken");
+const adminUsername = localStorage.getItem("ogsmsAdminUsername") || "Administrator";
+document.getElementById("adminName").textContent = adminUsername;
+if (localStorage.getItem("adminLoggedIn") !== "true" || !token) {
+  window.location.href = "admin-login.html";
+}
+function headers(){return {"Content-Type":"application/json","Authorization":"Bearer "+token};}
+function money(value){return "₦"+Number(value||0).toLocaleString("en-NG",{minimumFractionDigits:2,maximumFractionDigits:2});}
+function showNotice(message, success=false){const el=document.getElementById("notice");el.textContent=message;el.className="rounded-xl p-4 text-sm "+(success?"bg-emerald-50 text-emerald-800":"bg-red-50 text-red-700");}
+function safe(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+async function api(path, options={}){const response=await fetch(API_URL+path,{...options,headers:{...headers(),...(options.headers||{})}});const data=await response.json().catch(()=>({success:false,message:"Invalid server response"}));if(response.status===401){localStorage.removeItem("ogsmsAdminToken");localStorage.removeItem("adminLoggedIn");window.location.href="admin-login.html";}if(!response.ok||data.success===false)throw new Error(data.message||"Request failed");return data;}
+let selected=null;
+function selectUser(user){selected=user;document.getElementById("userEmail").value=user.email;document.getElementById("selectedUser").innerHTML=`<p class="font-bold text-[#0B4F63]">${safe(user.fullName||"OGSMS user")}</p><p class="break-all mt-1">${safe(user.email)}</p><p class="mt-2">Current balance: <strong>${money(user.balance)}</strong></p>`;}
+async function loadUsers(){const q=document.getElementById("searchInput").value.trim();const list=document.getElementById("usersList");list.innerHTML='<p class="text-slate-500 text-sm">Loading users…</p>';try{const data=await api("/admin/wallet/users?q="+encodeURIComponent(q));if(!data.users.length){list.innerHTML='<p class="text-slate-500 text-sm">No users found.</p>';return;}list.innerHTML=data.users.map(u=>`<button type="button" data-email="${safe(u.email)}" class="userPick w-full text-left border border-slate-200 hover:border-[#0B4F63] rounded-xl p-4"><span class="block font-semibold">${safe(u.fullName||"OGSMS user")}</span><span class="block text-sm text-slate-500 break-all">${safe(u.email)}</span><span class="block text-sm mt-2">Balance: <strong>${money(u.balance)}</strong></span></button>`).join("");list.querySelectorAll(".userPick").forEach(btn=>btn.addEventListener("click",()=>{const user=data.users.find(u=>u.email===btn.dataset.email);if(user)selectUser(user);}));if(selected){const refreshed=data.users.find(u=>u.email===selected.email);if(refreshed)selectUser(refreshed);}}catch(e){list.innerHTML='<p class="text-red-600 text-sm">'+safe(e.message)+'</p>';}}
+async function loadHistory(){const body=document.getElementById("historyTable");body.innerHTML='<tr><td colspan="7" class="p-4 text-slate-500">Loading history…</td></tr>';try{const email=selected?"?email="+encodeURIComponent(selected.email):"";const data=await api("/admin/wallet/transactions"+email);if(!data.transactions.length){body.innerHTML='<tr><td colspan="7" class="p-4 text-slate-500">No admin adjustments recorded yet.</td></tr>';return;}body.innerHTML=data.transactions.map(t=>`<tr class="border-t border-slate-100"><td class="p-3 whitespace-nowrap">${safe(new Date(t.createdAt).toLocaleString())}</td><td class="p-3 break-all">${safe(t.userEmail)}</td><td class="p-3"><span class="rounded-full px-3 py-1 ${t.action==="credit"?"bg-emerald-50 text-emerald-700":"bg-red-50 text-red-700"}">${t.action==="credit"?"Credit":"Debit"}</span></td><td class="p-3 font-semibold">${money(t.amount)}</td><td class="p-3">${money(t.balanceAfter)}</td><td class="p-3">${safe(t.reason)}</td><td class="p-3">${safe(t.adminUsername)}</td></tr>`).join("");}catch(e){body.innerHTML='<tr><td colspan="7" class="p-4 text-red-600">'+safe(e.message)+'</td></tr>';}}
+document.getElementById("searchBtn").addEventListener("click",loadUsers);document.getElementById("searchInput").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();loadUsers();}});document.getElementById("historyBtn").addEventListener("click",loadHistory);
+document.getElementById("adjustForm").addEventListener("submit",async e=>{e.preventDefault();if(!selected){showNotice("Select a user first.");return;}const action=document.getElementById("action").value;const amount=Number(document.getElementById("amount").value);const reason=document.getElementById("reason").value.trim();if(!Number.isFinite(amount)||amount<=0||!reason){showNotice("Enter a valid amount and reason.");return;}const label=action==="credit"?"ADD money to":"DEDUCT money from";if(!confirm(`Are you sure you want to ${label} ${selected.email} ${money(amount)}?`))return;const btn=document.getElementById("submitBtn");btn.disabled=true;btn.textContent="Processing…";try{const data=await api("/admin/wallet/adjust",{method:"POST",body:JSON.stringify({email:selected.email,action,amount,reason,adminUsername})});showNotice(data.message+" New balance: "+money(data.user.balance),true);document.getElementById("amount").value="";document.getElementById("reason").value="";selected=data.user;await loadUsers();selectUser(data.user);await loadHistory();}catch(err){showNotice(err.message);}finally{btn.disabled=false;btn.textContent="Apply adjustment";}});
+loadUsers();loadHistory();
+</script>
 </body>
-
 </html>

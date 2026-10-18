@@ -42,6 +42,8 @@ async function adminLogin() {
         if (data.success) {
 
             localStorage.setItem("adminLoggedIn", "true");
+            localStorage.setItem("ogsmsAdminToken", data.token);
+            localStorage.setItem("ogsmsAdminUsername", data.username || username);
 
             window.location.href = "admin-dashboard.html";
 
